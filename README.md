@@ -273,10 +273,8 @@ java -Dfile.encoding=utf-8 ${JVM_ARGS} -jar ${APP}.jar \
 
     - [PayPal](https://www.paypal.me/shiwenjinga)
 
-  | ![AliPay](https://weasley.oss-cn-shanghai.aliyuncs.com/Photos/image-20230713012837745.png) | ![WeChatPay](https://weasley.oss-cn-shanghai.aliyuncs.com/Photos/image-20230713013148459.png) |
-          | :--: | :--: |
-  | AliPay | WeChatPay |
-
+| ![AliPay](https://weasley.oss-cn-shanghai.aliyuncs.com/Photos/image-20230713012837745.png) | ![WeChatPay](https://weasley.oss-cn-shanghai.aliyuncs.com/Photos/image-20230713013148459.png) |
+|:------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------------------:|
 
 - **技术贡献**：如果您是开发者，您也可以通过提交代码、报告问题或者提供改进建议等方式来支持我们的项目。
 
