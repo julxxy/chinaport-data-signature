@@ -9,13 +9,18 @@
 
 ## 前言
 
-> After nearly two years of open-source code maintenance and exploration, we have successfully developed an all-in-one solution that offers free access and usage for a wide range of businesses. This solution aims to digitally sign and forward XML messages to the General Administration of Customs at the Chinese Electronic Port (HaiKou Customs), facilitating cross-border e-commerce operations and import-export trade for enterprises.
+> After nearly two years of open-source code maintenance and exploration, we have successfully developed an all-in-one
+> solution that offers free access and usage for a wide range of businesses. This solution aims to digitally sign and
+> forward XML messages to the General Administration of Customs at the Chinese Electronic Port (HaiKou Customs),
+> facilitating cross-border e-commerce operations and import-export trade for enterprises.
 >
 > 经过长达近两年的开源代码维护和探索，我们终于成功开发出一站式解决方案，为更多企业提供免费接入和使用。该解决方案的目标是对中国电子口岸海关（海口海关）总署的XML报文进行加签推送，以促进企业的跨境电商业务和进出口贸易。
 >
 > <u>Weasley J（2023-07）</u>
 
-该项目为中国电子口岸海关（海口海关）总署XML报文和海关179数据上报加签服务，提供一站式的免费解决方案，开箱即用，无需使用中间件。本项目遵守`GNU 3.0`协议。需要注意的是，项目中的测试用例所涉及的企业信息已经获得企业批准。当接入企业使用测试用例进行报文申报调试时，应将报文数据中涉及到的`报文传输编码（DXPID）`、`copCode`、`copName`、`电商平台代码ebpCode`等主体信息，替换成企业在中国电子口岸后台注册的有效信息。
+该项目为中国电子口岸海关（海口海关）总署XML报文和海关179数据上报加签服务，提供一站式的免费解决方案，开箱即用，无需使用中间件。本项目遵守
+`GNU 3.0`协议。需要注意的是，项目中的测试用例所涉及的企业信息已经获得企业批准。当接入企业使用测试用例进行报文申报调试时，应将报文数据中涉及到的
+`报文传输编码（DXPID）`、`copCode`、`copName`、`电商平台代码ebpCode`等主体信息，替换成企业在中国电子口岸后台注册的有效信息。
 
 ### 业务场景
 
@@ -23,10 +28,20 @@
 
 ### 使用提示
 
-- 对于单体应用，您可以直接下载[release](https://github.com/Weasley-J/chinaport-data-signature/releases)中的二进制文件使用（使用较多），根据您的实际情况适当修改运行参数。
-- 对于分布式微服务，建议切换到[feature_microservice](https://github.com/Weasley-J/chinaport-data-signature/tree/feature_microservice)分支进行构建（较少使用）。
-- 您还可以通过[Docker镜像快速搭建报文加签推送的环境](https://hub.docker.com/repository/docker/weasleyj/chinaport-data-signature)。
-- 如果您的电商后台系统也是使用`Java`语言开发，我们在[Maven仓库中上传了项目中用到的数据模型](https://central.sonatype.com/artifact/io.github.weasley-j/chinaport-data-signature-data-model)，可帮助您的系统与本项目快速集成。您只需要使用这些数据模型填充数据，然后使用`JSON`进行数据交互，从而降低对接成本。
+- 对于单体应用，您可以直接下载[release](https://github.com/Weasley-J/chinaport-data-signature/releases)
+  中的二进制文件使用（使用较多），根据您的实际情况适当修改运行参数。
+-
+
+对于分布式微服务，建议切换到[feature_microservice](https://github.com/Weasley-J/chinaport-data-signature/tree/feature_microservice)
+分支进行构建（较少使用）。
+
+-
+
+您还可以通过[Docker镜像快速搭建报文加签推送的环境](https://hub.docker.com/repository/docker/weasleyj/chinaport-data-signature)。
+
+- 如果您的电商后台系统也是使用`Java`
+  语言开发，我们在[Maven仓库中上传了项目中用到的数据模型](https://central.sonatype.com/artifact/io.github.weasley-j/chinaport-data-signature-data-model)
+  ，可帮助您的系统与本项目快速集成。您只需要使用这些数据模型填充数据，然后使用`JSON`进行数据交互，从而降低对接成本。
 
 ### 功能概述
 
@@ -40,9 +55,8 @@
 
 ![image-20230730220354700](https://weasley.oss-cn-shanghai.aliyuncs.com/Photos/image-20230730220354700.png)
 
-
-
-<u>当我们决定将此项目开源的时候，地球上的搜索引擎在2022年2月14日之前还无法搜索到任何有价值的信息。当面对付费解决方案时，ChatGPT是否能提供帮助呢……</u>
+<u>
+当我们决定将此项目开源的时候，地球上的搜索引擎在2022年2月14日之前还无法搜索到任何有价值的信息。当面对付费解决方案时，ChatGPT是否能提供帮助呢……</u>
 
 <table>
     <tr>
@@ -52,10 +66,10 @@
     </tr>
 </table>
 
-
 - **Previews of China E-Port Sata Signature**
 
-在项目开始之前，让我们先了解一下海关总署`XML`报文的加签服务在市场上的定价。虽然在百度和`CSDN`上，您可以找到海关179数据上报的接口对接方式，**但是唯独没有关于XML报文加签的信息**，请参考下图：
+在项目开始之前，让我们先了解一下海关总署`XML`报文的加签服务在市场上的定价。虽然在百度和`CSDN`上，您可以找到海关179数据上报的接口对接方式，
+**但是唯独没有关于XML报文加签的信息**，请参考下图：
 
 <img src="https://alphahub-test-bucket.oss-cn-shanghai.aliyuncs.com/image/IMG_0373-side.jpg" alt="IMG_0373-side"/>
 
@@ -77,16 +91,15 @@
 
 ![image-20230802165954038](https://weasley.oss-cn-shanghai.aliyuncs.com/Photos/image-20230802165954038.png)
 
--  加签失败邮件告警
+- 加签失败邮件告警
 
-  > [此功能需手动开启](https://github.com/Weasley-J/chinaport-data-signature/blob/main/chinaport-data-signature-webapp/src/main/resources/application-dev.yml#L25-L43)，开关属性: `spring.mail.enable`, 取值: `on/off`，也可以告警消息接入企业微信、钉钉、飞书、Discord等企业沟通软件。
+> [此功能需手动开启](https://github.com/Weasley-J/chinaport-data-signature/blob/main/chinaport-data-signature-webapp/src/main/resources/application-dev.yml#L25-L43)
+> ，开关属性: `spring.mail.enable`, 取值: `on/off`，也可以告警消息接入企业微信、钉钉、飞书、Discord等企业沟通软件。
 
   <figure>
    <img src="https://weasley.oss-cn-shanghai.aliyuncs.com/Photos/iShot_2023-08-10_13.56.34.png" alt="邮件通知效果">
   <figcaption>加签失败邮件通知</figcaption>
   </figure>
-
-
 
 ## 1 支持的电子口岸
 
@@ -108,12 +121,12 @@
 
 ## 3 软件运行概况
 
-| 序号 | 类目             | 版本                                                         | 备注                                                         |
-| ---- | ---------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| 1    | 软件运行环境     | [Java SE Development Kit 17](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) | 基础软件运行的`JDK`环境要求                                  |
-| 2    | 硬件运行环境     | `Windows-10-x64`/`Windows-11-x64`/`Windows-server-x64`/`Linux`(自行解决内网穿透问题,ukey只能插Windows电脑上) |                                                              |
-| 3    | 硬件性能要求     | > =1核CPU+2G运行内存                                         | 最低配置                                                     |
-| 4    | 对技术人员的要求 | 会把电子口岸ukey插入安装好[【中国电子口岸C卡/Key客户端控件】](https://app.singlewindow.cn/cas/login?service=http%3A%2F%2Fwww.singlewindow.cn%2Fsinglewindow%2Flogin.jspx)的`Windows`电脑上，会改启动脚本里面的参数，会用鼠标双击启动脚本 | **卡介质登录**可进入【中国电子口岸C卡/Key客户端控件】下载界面![image-20230718230033785](https://weasley.oss-cn-shanghai.aliyuncs.com/Photos/image-20230718230033785.png) |
+| 序号 | 类目       | 版本                                                                                                                                                                                   | 备注                                                                                                                                             |
+|----|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1  | 软件运行环境   | [Java SE Development Kit 17](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)                                                                           | 基础软件运行的`JDK`环境要求                                                                                                                               |
+| 2  | 硬件运行环境   | `Windows-10-x64`/`Windows-11-x64`/`Windows-server-x64`/`Linux`(自行解决内网穿透问题,ukey只能插Windows电脑上)                                                                                         |                                                                                                                                                |
+| 3  | 硬件性能要求   | > =1核CPU+2G运行内存                                                                                                                                                                      | 最低配置                                                                                                                                           |
+| 4  | 对技术人员的要求 | 会把电子口岸ukey插入安装好[【中国电子口岸C卡/Key客户端控件】](https://app.singlewindow.cn/cas/login?service=http%3A%2F%2Fwww.singlewindow.cn%2Fsinglewindow%2Flogin.jspx)的`Windows`电脑上，会改启动脚本里面的参数，会用鼠标双击启动脚本 | **卡介质登录**可进入【中国电子口岸C卡/Key客户端控件】下载界面![image-20230718230033785](https://weasley.oss-cn-shanghai.aliyuncs.com/Photos/image-20230718230033785.png) |
 
 > 不推荐使用国产浏览器蓝开以上超链，会出现页面找不到，建议使用：Microsoft Edge、Chrome、Fire Fox
 
@@ -126,20 +139,20 @@
 
 - [加签异常邮件通知配置示例](https://github.com/Weasley-J/chinaport-data-signature/blob/main/chinaport-data-signature-webapp/src/main/resources/application-dev.yml#L23-L41)
 
-| 配置参数                                         | 是否必须（Y/N） | 解释                                                         |
-| ------------------------------------------------ | --------------- | ------------------------------------------------------------ |
-| eport.signature.algorithm                        | N               | [XML签名的算法类型](https://github.com/Weasley-J/chinaport-data-signature/blob/main/chinaport-data-signature-webapp/src/main/java/cn/alphahub/eport/signature/config/SignatureAlgorithmProperties.java#L20)，不指定时使用程序自动推断的算法, 推荐使用程序自动推断的算法 |
-| eport.signature.ukey.ws-url                      | Y               | `u-key`所连接的`Windows`电脑的`socket`链接`url`,如: `ws://127.0.0.1:61232`,下载`release`直接运行的修改全局配置的`UKEY_HOST`即可 |
-| eport.signature.ukey.password                    | N               | u-key密码的密码，默认: `88888888`, 如果密码改过，需要指定下，下载`release`直接运行的修改全局配置的`UKEY_PASSWORD`即可 |
-| eport.signature.ukey.health.endpoint.client-name | N               | Windows上重启的ukey可执行文件全限定文件名称，不指定将自动查找（将程序安装到Windows平台上会生效，Linux、Uni环境无效） |
-| eport.signature.auth.enable                      | N               | [是否启用token鉴权](https://github.com/Weasley-J/chinaport-data-signature/blob/main/chinaport-data-signature-webapp/src/main/java/cn/alphahub/eport/signature/config/AuthenticationProperties.java#L17)，取值：<u>on/off</u>，生产环境建议开启 |
-| eport.signature.auth.token                       | N               | 客户端请求鉴权token, 默认值: DefaultAuthToken, [请求头](https://github.com/Weasley-J/chinaport-data-signature/blob/main/chinaport-data-signature-webapp/src/main/java/cn/alphahub/eport/signature/config/AuthenticationProperties.java#L24)，<u>生产环境不建议使用默认值</u> |
-| eport.signature.report.ceb-message.cop-code      | Y               | [电子口岸XML报文](https://github.com/Weasley-J/chinaport-data-signature/blob/main/chinaport-data-signature-webapp/src/main/java/cn/alphahub/eport/signature/config/ChinaEportProperties.java#L20)传输企业代码 |
-| eport.signature.report.ceb-message.cop-name      | Y               | 传输企业名称，报文传输的企业名称                             |
-| eport.signature.report.ceb-message.dxp-id        | Y               | 文传输编号，向中国电子口岸数据中心申请数据交换平台的用户编号 |
-| eport.signature.report.ceb-message.server        | N               | [海关服务器地址](https://github.com/Weasley-J/chinaport-data-signature/blob/main/chinaport-data-signature-webapp/src/main/java/cn/alphahub/eport/signature/config/ChinaEportProperties.java#L43)，<u>缺省则采用Client中的密文作文默认Server URL</u> |
-| eport.signature.report.customs179.ebp-code       | Y               | [海关 179 数据上报](https://github.com/Weasley-J/chinaport-data-signature/blob/main/chinaport-data-signature-webapp/src/main/java/cn/alphahub/eport/signature/config/Customs179Properties.java#L24)的电商平台代码 |
-| eport.signature.report.customs179.server         | N               | 数据上报服务器URL地址，链接格式: https://域名联系海关/ceb2grab/grab/realTimeDataUpload，<u>没有配置的话采用项目内置的URL密文地址</u> |
+| 配置参数                                             | 是否必须（Y/N） | 解释                                                                                                                                                                                                                                                 |
+|--------------------------------------------------|-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| eport.signature.algorithm                        | N         | [XML签名的算法类型](https://github.com/Weasley-J/chinaport-data-signature/blob/main/chinaport-data-signature-webapp/src/main/java/cn/alphahub/eport/signature/config/SignatureAlgorithmProperties.java#L20)，不指定时使用程序自动推断的算法, 推荐使用程序自动推断的算法                |
+| eport.signature.ukey.ws-url                      | Y         | `u-key`所连接的`Windows`电脑的`socket`链接`url`,如: `ws://127.0.0.1:61232`,下载`release`直接运行的修改全局配置的`UKEY_HOST`即可                                                                                                                                              |
+| eport.signature.ukey.password                    | N         | u-key密码的密码，默认: `88888888`, 如果密码改过，需要指定下，下载`release`直接运行的修改全局配置的`UKEY_PASSWORD`即可                                                                                                                                                                   |
+| eport.signature.ukey.health.endpoint.client-name | N         | Windows上重启的ukey可执行文件全限定文件名称，不指定将自动查找（将程序安装到Windows平台上会生效，Linux、Uni环境无效）                                                                                                                                                                            |
+| eport.signature.auth.enable                      | N         | [是否启用token鉴权](https://github.com/Weasley-J/chinaport-data-signature/blob/main/chinaport-data-signature-webapp/src/main/java/cn/alphahub/eport/signature/config/AuthenticationProperties.java#L17)，取值：<u>on/off</u>，生产环境建议开启                        |
+| eport.signature.auth.token                       | N         | 客户端请求鉴权token, 默认值: DefaultAuthToken, [请求头](https://github.com/Weasley-J/chinaport-data-signature/blob/main/chinaport-data-signature-webapp/src/main/java/cn/alphahub/eport/signature/config/AuthenticationProperties.java#L24)，<u>生产环境不建议使用默认值</u> |
+| eport.signature.report.ceb-message.cop-code      | Y         | [电子口岸XML报文](https://github.com/Weasley-J/chinaport-data-signature/blob/main/chinaport-data-signature-webapp/src/main/java/cn/alphahub/eport/signature/config/ChinaEportProperties.java#L20)传输企业代码                                                  |
+| eport.signature.report.ceb-message.cop-name      | Y         | 传输企业名称，报文传输的企业名称                                                                                                                                                                                                                                   |
+| eport.signature.report.ceb-message.dxp-id        | Y         | 文传输编号，向中国电子口岸数据中心申请数据交换平台的用户编号                                                                                                                                                                                                                     |
+| eport.signature.report.ceb-message.server        | N         | [海关服务器地址](https://github.com/Weasley-J/chinaport-data-signature/blob/main/chinaport-data-signature-webapp/src/main/java/cn/alphahub/eport/signature/config/ChinaEportProperties.java#L43)，<u>缺省则采用Client中的密文作文默认Server URL</u>                     |
+| eport.signature.report.customs179.ebp-code       | Y         | [海关 179 数据上报](https://github.com/Weasley-J/chinaport-data-signature/blob/main/chinaport-data-signature-webapp/src/main/java/cn/alphahub/eport/signature/config/Customs179Properties.java#L24)的电商平台代码                                               |
+| eport.signature.report.customs179.server         | N         | 数据上报服务器URL地址，链接格式: https://域名联系海关/ceb2grab/grab/realTimeDataUpload，<u>没有配置的话采用项目内置的URL密文地址</u>                                                                                                                                                     |
 
 ## 5 项目启动脚本
 
@@ -179,25 +192,25 @@ java -Dfile.encoding=utf-8 ${JVM_ARGS} -jar ${APP}.jar \
 
 ## 6 软件架构
 
-| 类目                           | 版本        | 备注                                                   |
-| ------------------------------ | ----------- | ------------------------------------------------------ |
-| JDK 17                         | 17.0.7 LTS  | 软件运行的最低JDK版本                                  |
-| spring-boot                    | 3.1.1       |                                                        |
-| spring-cloud                   | 2022.0.0-M1 |                                                        |
+| 类目                             | 版本          | 备注                                   |
+|--------------------------------|-------------|--------------------------------------|
+| JDK 17                         | 17.0.7 LTS  | 软件运行的最低JDK版本                         |
+| spring-boot                    | 3.1.1       |                                      |
+| spring-cloud                   | 2022.0.0-M1 |                                      |
 | smart-doc                      | 2.7.3       | 一个自动化的API文档输出工具，效率word、rap2、swagger高 |
-| sonar                          | 3.9.0.2155  | 一款开源的代码质量分析工具，能编码是规避很多潜在bug    |
-| spring-boot-starter-validation | 3.1.1       | spring新一代的参数校验器，替代javax JSR303的工具       |
-| spring-boot-starter-websocket  | 3.1.1       | spring官方维护的websocket starter                      |
+| sonar                          | 3.9.0.2155  | 一款开源的代码质量分析工具，能编码是规避很多潜在bug          |
+| spring-boot-starter-validation | 3.1.1       | spring新一代的参数校验器，替代javax JSR303的工具    |
+| spring-boot-starter-websocket  | 3.1.1       | spring官方维护的websocket starter         |
 
 单体架构，可直接开箱即用，支持集群部署，也可与分布式微服务集成，可拔插注入配置中心，通过远程`RPC`调用接口加签。
-
-
 
 ## 7 开发文档
 
 > 本项目已支持直接使用`JSON`数据加签上报，告别XML数据、179特殊数据组装那样三拜九叩的繁琐！
 
-启动项目，浏览器访问: http://127.0.0.1:8080 ,会打开[接口文档](https://github.com/Weasley-J/chinaport-data-signature/blob/main/中国电子口岸报文加签接口文档.md)的H5页面，可直接在页面给ukey发送请求进行调试，注意请求参数的**字符串转义问题**。
+启动项目，浏览器访问: http://127.0.0.1:8080
+,会打开[接口文档](https://github.com/Weasley-J/chinaport-data-signature/blob/main/中国电子口岸报文加签接口文档.md)
+的H5页面，可直接在页面给ukey发送请求进行调试，注意请求参数的**字符串转义问题**。
 
 ![image-20230713233904520](https://weasley.oss-cn-shanghai.aliyuncs.com/Photos/image-20230713233904520.png)
 
@@ -242,8 +255,6 @@ java -Dfile.encoding=utf-8 ${JVM_ARGS} -jar ${APP}.jar \
 
 感谢您使用本开源项目！为了持续改进并为更多企业提供免费的加签解决方案，我们诚恳地邀请您考虑赞助支持我们的项目。您的慷慨赞助将直接帮助我们维护和改进该项目，使其能够为更多企业节省成本、提高效率。
 
-
-
 ## 支持赞助
 
 ### 为什么赞助
@@ -258,22 +269,14 @@ java -Dfile.encoding=utf-8 ${JVM_ARGS} -jar ${APP}.jar \
 
 > 您可以根据自身能力自由选择捐赠金额，无论您选择捐赠的金额大小，我们都非常感激，您的每一份赞助都对本项目发展都起到了重要的作用。
 
-- **捐赠**：您可以通过以下链接进行捐赠: 
+- **捐赠**：您可以通过以下链接进行捐赠:
 
-  - [PayPal](https://www.paypal.me/shiwenjinga)
+    - [PayPal](https://www.paypal.me/shiwenjinga)
 
-  - <div style="display: flex; flex-direction: row;">
-    <div>
-      <img src="https://weasley.oss-cn-shanghai.aliyuncs.com/Photos/image-20230713012837745.png" alt="AliPay" width="300" height="300">
-      <p align="center">AliPay</p>
-    </div>
-    <div>
-      <img src="https://weasley.oss-cn-shanghai.aliyuncs.com/Photos/image-20230713013148459.png" alt="WeChatPay" width="300" height="300">
-      <p align="center">WeChatPay</p>
-    </div>
-    </div>
-    
-    
+  | ![AliPay](https://weasley.oss-cn-shanghai.aliyuncs.com/Photos/image-20230713012837745.png) | ![WeChatPay](https://weasley.oss-cn-shanghai.aliyuncs.com/Photos/image-20230713013148459.png) |
+          | :--: | :--: |
+  | AliPay | WeChatPay |
+
 
 - **技术贡献**：如果您是开发者，您也可以通过提交代码、报告问题或者提供改进建议等方式来支持我们的项目。
 
@@ -281,9 +284,8 @@ java -Dfile.encoding=utf-8 ${JVM_ARGS} -jar ${APP}.jar \
 
 ### 感谢您的支持
 
-我们衷心感谢您对我们项目的关注和支持！您的赞助将鼓励我们继续改进和提供更好的解决方案，造福更多的企业和开发者。如果您有任何问题或者疑问，请随时联系我们, 联系邮箱: 1432689025@qq.com
-
-
+我们衷心感谢您对我们项目的关注和支持！您的赞助将鼓励我们继续改进和提供更好的解决方案，造福更多的企业和开发者。如果您有任何问题或者疑问，请随时联系我们,
+联系邮箱: 1432689025@qq.com
 
 ## 接入企业登记
 
@@ -292,8 +294,6 @@ java -Dfile.encoding=utf-8 ${JVM_ARGS} -jar ${APP}.jar \
 您的公司名将在我们的 README 中特别标注，并列入接入企业名单，以展示对您的感激之情。同时，我们也欢迎您提供您公司的官方网站链接，以便其他用户了解更多关于您公司的信息。
 
 感谢您的配合和支持，我们将竭诚为您提供更好的服务！
-
-
 
 ## 接入企业
 
