@@ -3,13 +3,12 @@ package cn.alphahub.eport.signature.config;
 import cn.alphahub.eport.signature.core.CertificateHandler;
 import cn.alphahub.eport.signature.core.WebSocketClientHandler;
 import cn.alphahub.eport.signature.entity.WebSocketWrapper;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
-
-import java.util.List;
 
 /**
  * Ukey Web Socket Configurer

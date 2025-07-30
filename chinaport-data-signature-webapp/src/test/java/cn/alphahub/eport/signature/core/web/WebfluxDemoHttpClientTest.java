@@ -4,6 +4,7 @@ import cn.alphahub.dtt.plus.util.JacksonUtil;
 import cn.alphahub.eport.signature.base.domain.Result;
 import cn.alphahub.eport.signature.config.WebClientConfiguration;
 import cn.alphahub.eport.signature.entity.SignResult;
+import java.nio.charset.StandardCharsets;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -11,8 +12,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.DigestUtils;
-
-import java.nio.charset.StandardCharsets;
 
 import static cn.alphahub.eport.signature.config.AuthenticationProperties.AUTHENTICATION_HEADER;
 

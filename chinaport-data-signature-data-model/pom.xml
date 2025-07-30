@@ -8,13 +8,13 @@
     <version>1.0.7</version>
     <name>chinaport-data-signature-data-model</name>
     <packaging>jar</packaging>
-    <url>https://github.com/Weasley-J/chinaport-data-signature/tree/main/chinaport-data-signature-data-model</url>
+    <url>https://github.com/julxxy/chinaport-data-signature/tree/main/chinaport-data-signature-data-model</url>
     <description>中国电子口岸加签服务数据模型: 1. 海关 179 数据抓取; 2. 海关总署xml报文</description>
 
     <licenses>
         <license>
             <name>GNU GENERAL PUBLIC LICENSE, Version 3</name>
-            <url>https://github.com/Weasley-J/chinaport-data-signature/blob/main/chinaport-data-signature-data-model/LICENSE</url>
+            <url>https://github.com/julxxy/chinaport-data-signature/blob/main/chinaport-data-signature-data-model/LICENSE</url>
             <distribution>repo</distribution>
         </license>
     </licenses>
@@ -28,9 +28,9 @@
     </developers>
 
     <scm>
-        <url>https://github.com/Weasley-J/chinaport-data-signature/tree/main/chinaport-data-signature-data-model</url>
-        <connection>https://github.com/Weasley-J/chinaport-data-signature.git</connection>
-        <developerConnection>https://github.com/Weasley-J/chinaport-data-signature</developerConnection>
+        <url>https://github.com/julxxy/chinaport-data-signature/tree/main/chinaport-data-signature-data-model</url>
+        <connection>https://github.com/julxxy/chinaport-data-signature.git</connection>
+        <developerConnection>https://github.com/julxxy/chinaport-data-signature</developerConnection>
     </scm>
 
     <properties>

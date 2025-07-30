@@ -9,35 +9,41 @@ import jakarta.servlet.http.HttpServletRequest;
  * @since 1.1.0
  */
 public final class ClientIPUtils {
+
     static final String UNKNOWN = "unknown";
 
     private ClientIPUtils() {
     }
 
     public static String getClientIP(HttpServletRequest request) {
-        String ipAddress = request.getHeader("X-Forwarded-For");
-
-        if (null == ipAddress || ipAddress.isEmpty() || UNKNOWN.equalsIgnoreCase(ipAddress)) {
-            ipAddress = request.getHeader("Proxy-Client-IP");
+        String[] headers = {
+                "X-Forwarded-For",
+                "Proxy-Client-IP",
+                "WL-Proxy-Client-IP",
+                "HTTP_CLIENT_IP",
+                "HTTP_X_FORWARDED_FOR"
+        };
+        String ip = null;
+        for (String header : headers) {
+            ip = request.getHeader(header);
+            if (ip != null && !ip.isEmpty() && !UNKNOWN.equalsIgnoreCase(ip)) {
+                break;
+            }
         }
-        if (null == ipAddress || ipAddress.isEmpty() || UNKNOWN.equalsIgnoreCase(ipAddress)) {
-            ipAddress = request.getHeader("WL-Proxy-Client-IP");
+        // 兜底
+        if (ip == null || ip.isEmpty() || UNKNOWN.equalsIgnoreCase(ip)) {
+            ip = request.getRemoteAddr();
         }
-        if (null == ipAddress || ipAddress.isEmpty() || UNKNOWN.equalsIgnoreCase(ipAddress)) {
-            ipAddress = request.getHeader("HTTP_CLIENT_IP");
+        // 多级反代时，X-Forwarded-For会有多个IP，取第一个非unknown的
+        if (ip != null && ip.contains(",")) {
+            for (String realIp : ip.split(",")) {
+                realIp = realIp.trim();
+                if (!realIp.isEmpty() && !UNKNOWN.equalsIgnoreCase(realIp)) {
+                    return realIp;
+                }
+            }
         }
-        if (null == ipAddress || ipAddress.isEmpty() || UNKNOWN.equalsIgnoreCase(ipAddress)) {
-            ipAddress = request.getHeader("HTTP_X_FORWARDED_FOR");
-        }
-        if (null == ipAddress || ipAddress.isEmpty() || UNKNOWN.equalsIgnoreCase(ipAddress)) {
-            ipAddress = request.getRemoteAddr();
-        }
-
-        // 如果客户端经过了多级反向代理，那么 X-Forwarded-For 中的值是以逗号分隔的 IP 地址列表，取第一个非 unknown 的 IP 地址
-        if (ipAddress != null && ipAddress.contains(",")) {
-            ipAddress = ipAddress.split(",")[0].trim();
-        }
-
-        return ipAddress;
+        return ip;
     }
+
 }

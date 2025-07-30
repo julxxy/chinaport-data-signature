@@ -10,12 +10,11 @@ import cn.hutool.json.JSONUtil;
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.github.weasleyj.china.eport.sign.model.cebmessage.export.CEB303Message;
 import io.github.weasleyj.china.eport.sign.util.JAXBUtil;
+import java.util.HashMap;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.HashMap;
 
 /**
  * 621 进口单 xml 上报测试

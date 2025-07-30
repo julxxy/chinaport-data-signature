@@ -40,17 +40,16 @@ import io.github.weasleyj.china.eport.sign.model.signature.Transforms;
 import io.github.weasleyj.china.eport.sign.model.signature.X509Data;
 import io.github.weasleyj.china.eport.sign.util.GUIDUtil;
 import io.github.weasleyj.china.eport.sign.util.JAXBUtil;
-import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.stereotype.Component;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Component;
 
 import static cn.alphahub.dtt.plus.util.JacksonUtil.readValue;
 import static cn.alphahub.dtt.plus.util.JacksonUtil.toJson;

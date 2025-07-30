@@ -5,15 +5,14 @@ import cn.alphahub.eport.signature.entity.SignResult;
 import cn.hutool.core.io.IoUtil;
 import cn.hutool.json.JSONUtil;
 import jakarta.annotation.Resource;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.nio.charset.StandardCharsets;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.ResourceUtils;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.nio.charset.StandardCharsets;
 
 /**
  * 核心方法测试

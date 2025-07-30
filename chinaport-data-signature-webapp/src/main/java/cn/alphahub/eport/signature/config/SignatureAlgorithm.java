@@ -1,10 +1,9 @@
 package cn.alphahub.eport.signature.config;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-
 import java.util.Arrays;
 import java.util.Objects;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 /**
  * XML Signature Algorithm

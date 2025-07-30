@@ -5,15 +5,15 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.1.5</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <version>3.4.8</version>
+        <relativePath/>
     </parent>
 
     <groupId>cn.alphahub.eport.signature</groupId>
     <artifactId>chinaport-data-signature-webapp</artifactId>
-    <version>1.1.1</version>
+    <version>1.2.0</version>
     <name>chinaport-data-signature-webapp</name>
-    <url>https://github.com/Weasley-J/chinaport-data-signature.git</url>
+    <url>https://github.com/julxxy/chinaport-data-signature.git</url>
 
     <description>China E-Port data signature， 中国电子口岸报文加签推送应用，2022年2月11日开源此解决方案</description>
 
@@ -21,22 +21,24 @@
         <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <spring-cloud.version>2022.0.5</spring-cloud.version>
+        <spring-cloud.version>2024.0.2</spring-cloud.version>
         <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
-        <hutool-all.version>5.8.26</hutool-all.version>
+        <hutool-all.version>5.8.39</hutool-all.version>
         <smart-doc.version>2.7.3</smart-doc.version>
-        <xmlsec.version>3.0.2</xmlsec.version>
-        <lombok.version>1.18.30</lombok.version>
+        <xmlsec.version>3.0.3</xmlsec.version>
+        <lombok.version>1.18.38</lombok.version>
         <snakeyaml.version>2.2</snakeyaml.version>
         <jna.version>3.0.9</jna.version>
         <dtt-utils.version>1.4.1</dtt-utils.version>
+        <commons-lang3.version>3.18.0</commons-lang3.version>
         <commons-io.version>2.15.1</commons-io.version>
+        <commons-collections4.version>4.5.0</commons-collections4.version>
         <multiple-email.version>3.0.0</multiple-email.version>
         <signature-data-model.version>1.0.7</signature-data-model.version>
         <jaxb-api.version>2.4.0-b180830.0359</jaxb-api.version>
         <jaxb-runtime.version>2.3.8</jaxb-runtime.version>
-        <guava.version>32.1.1-jre</guava.version>
+        <guava.version>33.4.8-jre</guava.version>
         <sonar.host.url>http://192.168.31.140:9001</sonar.host.url>
         <sonar.login>admin</sonar.login>
         <sonar.password>123456</sonar.password>
@@ -56,6 +58,7 @@
             <artifactId>chinaport-data-signature-data-model</artifactId>
             <version>${signature-data-model.version}</version>
         </dependency>
+
         <!--email support-->
         <dependency>
             <groupId>io.github.weasley-j</groupId>
@@ -131,6 +134,7 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3.version}</version>
         </dependency>
 
         <dependency>
@@ -142,6 +146,7 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-collections4</artifactId>
+            <version>${commons-collections4.version}</version>
         </dependency>
 
         <dependency>
@@ -172,6 +177,11 @@
             <artifactId>caffeine</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcpkix-jdk15on</artifactId>
+        </dependency>
+
     </dependencies>
 
     <dependencyManagement>
@@ -197,6 +207,11 @@
                 <groupId>org.glassfish.jaxb</groupId>
                 <artifactId>jaxb-runtime</artifactId>
                 <version>${jaxb-runtime.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcpkix-jdk15on</artifactId>
+                <version>1.70</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

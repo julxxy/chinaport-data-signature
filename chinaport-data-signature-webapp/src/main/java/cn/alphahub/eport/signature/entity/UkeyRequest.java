@@ -1,14 +1,13 @@
 package cn.alphahub.eport.signature.entity;
 
+import java.io.Serializable;
+import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import org.springframework.lang.Nullable;
-
-import java.io.Serializable;
-import java.util.Map;
 
 /**
  * Ukey Request

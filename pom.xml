@@ -8,7 +8,7 @@
     <version>1.0.0</version>
     <name>chinaport-data-signature</name>
     <packaging>pom</packaging>
-    <url>https://github.com/Weasley-J/chinaport-data-signature.git</url>
+    <url>https://github.com/julxxy/chinaport-data-signature.git</url>
 
     <description>China E-Port data signature， 中国电子口岸报文加签推送应用，2022年2月11日开源此解决方案</description>
 

@@ -10,8 +10,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.Objects;
 import java.util.function.Consumer;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -57,9 +57,8 @@ public class WebClientConfiguration {
                 .defaultStatusHandler(HttpStatusCode::isError, resp -> Mono.just(new EportWebClientException("Web Client 调用发生异常!")))
                 .baseUrl(StringUtils.defaultIfBlank(chinaEportProperties.getServer(), new String(Base64.decodeBase64(EPORT_CEBMESSAGE_SERVER_ENCODE))))
                 .build();
-        HttpServiceProxyFactory httpServiceProxyFactory = HttpServiceProxyFactory.builder(WebClientAdapter.forClient(webClient))
-                .build();
-        return httpServiceProxyFactory.createClient(EportCebMessageHttpClient.class);
+        HttpServiceProxyFactory proxyFactory = HttpServiceProxyFactory.builderFor(WebClientAdapter.create(webClient)).build();
+        return proxyFactory.createClient(EportCebMessageHttpClient.class);
     }
 
 
@@ -80,8 +79,8 @@ public class WebClientConfiguration {
                 .defaultStatusHandler(HttpStatusCode::isError, resp -> Mono.just(new EportWebClientException("Web Client 调用发生异常!")))
                 .baseUrl(StringUtils.defaultIfBlank(customs179Properties.getServer(), new String(Base64.decodeBase64(REPORT_PROD_ENV_179_URL_ENCODE))))
                 .build();
-        HttpServiceProxyFactory httpServiceProxyFactory = HttpServiceProxyFactory.builder(WebClientAdapter.forClient(webClient)).build();
-        return httpServiceProxyFactory.createClient(EportCustoms179HttpClient.class);
+        HttpServiceProxyFactory proxyFactory = HttpServiceProxyFactory.builderFor(WebClientAdapter.create(webClient)).build();
+        return proxyFactory.createClient(EportCustoms179HttpClient.class);
     }
 
     /**
@@ -96,8 +95,8 @@ public class WebClientConfiguration {
                 .defaultStatusHandler(HttpStatusCode::isError, resp -> Mono.just(new EportWebClientException("Web Client 调用发生异常!")))
                 .baseUrl(baseUrl)
                 .build();
-        return HttpServiceProxyFactory.builder(WebClientAdapter.forClient(webClient)).build()
-                .createClient(EportReportResultHttpClient.class);
+        return HttpServiceProxyFactory.builderFor(WebClientAdapter.create(webClient))
+                .build().createClient(EportReportResultHttpClient.class);
     }
 
     /**
@@ -115,9 +114,8 @@ public class WebClientConfiguration {
                 .defaultStatusHandler(HttpStatusCode::isError, resp -> Mono.just(new EportWebClientException("Web Client 调用发生异常!")))
                 .baseUrl("http://127.0.0.1:8080")
                 .build();
-        WebClientAdapter clientAdapter = WebClientAdapter.forClient(webClient);
-        HttpServiceProxyFactory httpServiceProxyFactory = HttpServiceProxyFactory.builder(clientAdapter).build();
-        return httpServiceProxyFactory.createClient(WebfluxDemoHttpClient.class);
+        HttpServiceProxyFactory proxyFactory = HttpServiceProxyFactory.builderFor(WebClientAdapter.create(webClient)).build();
+        return proxyFactory.createClient(WebfluxDemoHttpClient.class);
     }
 
     /**
