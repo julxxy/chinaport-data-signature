@@ -1,10 +1,9 @@
 package cn.alphahub.eport.signature.base.domain;
 
+import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.io.Serializable;
 
 /**
  * 数据返回封装顶层抽象类

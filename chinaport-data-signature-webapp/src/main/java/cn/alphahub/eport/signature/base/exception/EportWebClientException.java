@@ -1,8 +1,7 @@
 package cn.alphahub.eport.signature.base.exception;
 
-import lombok.Getter;
-
 import java.io.Serial;
+import lombok.Getter;
 
 /**
  * The eport web client exception

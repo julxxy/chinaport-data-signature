@@ -8,13 +8,12 @@ import cn.alphahub.eport.signature.entity.Capture179DataResponse;
 import cn.alphahub.eport.signature.entity.ConsoleOutput;
 import cn.alphahub.eport.signature.entity.ThirdAbstractResponse;
 import cn.hutool.json.JSONUtil;
+import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.Map;
 
 import static com.alibaba.nacos.common.utils.JacksonUtils.toJson;
 

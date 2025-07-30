@@ -1,12 +1,11 @@
 package cn.alphahub.eport.signature.after202207;
 
 import cn.alphahub.eport.signature.entity.UkeyRequest;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 
 /**
  * 测试获取证书与对应的签名方法

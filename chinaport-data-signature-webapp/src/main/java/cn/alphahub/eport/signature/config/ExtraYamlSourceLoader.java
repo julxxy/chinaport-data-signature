@@ -1,5 +1,6 @@
 package cn.alphahub.eport.signature.config;
 
+import java.util.Objects;
 import org.springframework.beans.factory.config.YamlPropertiesFactoryBean;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.mail.MailProperties;
@@ -7,8 +8,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
-
-import java.util.Objects;
 
 /**
  * 加载classpath下的yaml文件到spring环境

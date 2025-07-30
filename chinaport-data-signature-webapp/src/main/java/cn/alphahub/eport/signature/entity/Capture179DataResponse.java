@@ -1,8 +1,7 @@
 package cn.alphahub.eport.signature.entity;
 
-import lombok.Data;
-
 import java.io.Serializable;
+import lombok.Data;
 
 /**
  * 海关 179 数据抓取

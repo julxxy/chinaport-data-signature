@@ -3,13 +3,12 @@ package cn.alphahub.eport.signature.after202207;
 import cn.alphahub.eport.signature.entity.UkeyRequest;
 import cn.hutool.json.JSONConfig;
 import cn.hutool.json.JSONUtil;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 /**
  * 查看海关证书有效期

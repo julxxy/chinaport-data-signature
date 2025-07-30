@@ -11,15 +11,14 @@ import cn.alphahub.eport.signature.entity.ThirdAbstractResponse;
 import cn.alphahub.eport.signature.entity.UploadCEBMessageRequest;
 import io.github.weasleyj.china.eport.sign.model.request.MessageRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.Map;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-
-import java.io.IOException;
-import java.util.Map;
 
 import static cn.alphahub.eport.signature.feign.ChinaEportSignatureFeignClient.NAME;
 

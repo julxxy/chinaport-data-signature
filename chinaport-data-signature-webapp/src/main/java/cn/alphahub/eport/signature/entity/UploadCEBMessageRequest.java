@@ -4,12 +4,11 @@ import cn.alphahub.eport.signature.base.enums.RequestDataType;
 import cn.hutool.json.JSONUtil;
 import io.github.weasleyj.china.eport.sign.constants.MessageType;
 import jakarta.validation.constraints.NotNull;
+import java.io.Serial;
+import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.io.Serial;
-import java.io.Serializable;
 
 /**
  * 上报进口单、出口单入参

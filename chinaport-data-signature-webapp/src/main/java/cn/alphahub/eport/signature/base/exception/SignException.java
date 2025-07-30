@@ -1,11 +1,10 @@
 package cn.alphahub.eport.signature.base.exception;
 
+import java.io.Serial;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-
-import java.io.Serial;
 
 /**
  * 自定义异常

@@ -7,14 +7,13 @@ import cn.alphahub.eport.signature.entity.UkeyRequest;
 import cn.hutool.json.JSONUtil;
 import io.github.weasleyj.china.eport.sign.model.customs179.Customs179Request;
 import io.github.weasleyj.china.eport.sign.util.GUIDUtil;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 import static cn.alphahub.dtt.plus.util.JacksonUtil.toJson;
 import static cn.alphahub.eport.signature.core.CertificateHandler.SING_DATA_METHOD;

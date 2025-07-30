@@ -1,6 +1,9 @@
 package cn.alphahub.eport.signature.config;
 
 import cn.alphahub.eport.signature.support.CommandClient;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -11,10 +14,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.SystemUtils;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import static cn.alphahub.eport.signature.config.ICommand.EPORT_ACCESS_CONTROL;
 import static cn.alphahub.eport.signature.config.ICommand.EPORT_WS_SERVER;

@@ -1,10 +1,9 @@
 package cn.alphahub.eport.signature.entity;
 
-import lombok.Data;
-import lombok.experimental.Accessors;
-
 import java.io.Serializable;
 import java.util.concurrent.atomic.AtomicReference;
+import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * WebSocket上下文包装类

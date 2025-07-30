@@ -2,14 +2,13 @@ package cn.alphahub.eport.signature.entity;
 
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotBlank;
+import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import org.springframework.lang.Nullable;
-
-import java.io.Serializable;
 
 /**
  * 加签数据请求入参

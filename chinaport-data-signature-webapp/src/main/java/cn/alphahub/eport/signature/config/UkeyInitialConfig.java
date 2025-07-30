@@ -12,7 +12,6 @@ import cn.alphahub.eport.signature.entity.UkeyResponse;
 import cn.alphahub.eport.signature.entity.WebSocketWrapper;
 import cn.alphahub.eport.signature.support.CertificateParser;
 import cn.hutool.core.lang.TypeReference;
-import java.io.IOException;
 import java.security.cert.X509Certificate;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -40,15 +39,6 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.client.WebSocketConnectionManager;
 import org.springframework.web.socket.client.standard.StandardWebSocketClient;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
-
-import java.security.cert.X509Certificate;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicReference;
-import java.util.concurrent.locks.LockSupport;
 
 import static cn.alphahub.eport.signature.core.CertificateHandler.SING_DATA_METHOD;
 import static cn.hutool.json.JSONUtil.toBean;

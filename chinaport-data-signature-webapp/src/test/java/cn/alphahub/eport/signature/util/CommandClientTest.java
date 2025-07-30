@@ -2,9 +2,8 @@ package cn.alphahub.eport.signature.util;
 
 import cn.alphahub.eport.signature.support.CommandClient;
 import cn.hutool.json.JSONUtil;
-import org.junit.jupiter.api.Test;
-
 import java.util.concurrent.CompletableFuture;
+import org.junit.jupiter.api.Test;
 
 class CommandClientTest {
 
