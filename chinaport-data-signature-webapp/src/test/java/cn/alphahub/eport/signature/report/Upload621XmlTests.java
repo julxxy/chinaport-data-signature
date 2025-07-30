@@ -12,13 +12,12 @@ import io.github.weasleyj.china.eport.sign.model.cebmessage.CEB621Message;
 import io.github.weasleyj.china.eport.sign.model.request.MessageRequest;
 import io.github.weasleyj.china.eport.sign.util.GUIDUtil;
 import io.github.weasleyj.china.eport.sign.util.JAXBUtil;
+import java.nio.charset.StandardCharsets;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.nio.charset.StandardCharsets;
 
 /**
  * 621 进口单 xml 上报测试

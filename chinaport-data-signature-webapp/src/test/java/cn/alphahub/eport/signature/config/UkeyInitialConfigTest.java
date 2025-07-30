@@ -2,15 +2,14 @@ package cn.alphahub.eport.signature.config;
 
 import cn.alphahub.eport.signature.entity.SignRequest;
 import cn.hutool.core.io.IoUtil;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.nio.charset.StandardCharsets;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.ResourceUtils;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.nio.charset.StandardCharsets;
 
 @SpringBootTest
 public class UkeyInitialConfigTest {

@@ -1,14 +1,13 @@
 package cn.alphahub.eport.signature.config;
 
+import java.util.Collections;
+import java.util.List;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
-
-import java.util.Collections;
-import java.util.List;
 
 /**
  * 跨域配置类，解决ajax请求跨域问题
