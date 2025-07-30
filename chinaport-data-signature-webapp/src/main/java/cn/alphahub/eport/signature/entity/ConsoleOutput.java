@@ -1,12 +1,11 @@
 package cn.alphahub.eport.signature.entity;
 
+import java.io.Serializable;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
-
-import java.io.Serializable;
-import java.util.List;
 
 /**
  * 控制台输出

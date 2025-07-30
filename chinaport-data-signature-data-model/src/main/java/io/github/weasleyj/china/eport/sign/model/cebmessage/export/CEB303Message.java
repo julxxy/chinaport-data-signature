@@ -5,19 +5,18 @@ import io.github.weasleyj.china.eport.sign.constants.NameSpace;
 import io.github.weasleyj.china.eport.sign.model.cebmessage.BaseSubscribe;
 import io.github.weasleyj.china.eport.sign.model.cebmessage.BaseTransfer;
 import io.github.weasleyj.china.eport.sign.model.cebmessage.ExtendMessage;
+import java.io.Serializable;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.Accessors;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import java.io.Serializable;
 
 /**
  * CEB303Message 出口单

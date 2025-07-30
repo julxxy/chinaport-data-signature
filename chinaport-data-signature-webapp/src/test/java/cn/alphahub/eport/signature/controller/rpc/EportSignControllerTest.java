@@ -17,17 +17,16 @@ import io.github.weasleyj.china.eport.sign.model.cebmessage.CEB311Message;
 import io.github.weasleyj.china.eport.sign.model.request.MessageRequest;
 import io.github.weasleyj.china.eport.sign.util.GUIDUtil;
 import io.github.weasleyj.china.eport.sign.util.JAXBUtil;
-import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 /**
  * Eport Sign Controller Test

@@ -4,6 +4,7 @@ import cn.alphahub.eport.signature.base.domain.Result;
 import cn.alphahub.eport.signature.util.ClientIPUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -13,8 +14,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
-import java.io.PrintWriter;
 
 import static cn.alphahub.dtt.plus.util.JacksonUtil.toJson;
 import static cn.alphahub.eport.signature.config.AuthenticationProperties.AUTHENTICATION_HEADER;

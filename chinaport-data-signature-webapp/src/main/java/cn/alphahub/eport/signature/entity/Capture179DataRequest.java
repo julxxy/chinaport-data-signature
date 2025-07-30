@@ -5,13 +5,12 @@ import io.github.weasleyj.china.eport.sign.model.customs179.PayExchangeInfoHead;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import java.io.Serializable;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
-
-import java.io.Serializable;
-import java.util.List;
 
 /**
  * 海关179数据抓取

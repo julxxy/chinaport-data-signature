@@ -8,6 +8,7 @@ import cn.alphahub.eport.signature.entity.ThirdAbstractResponse;
 import cn.alphahub.eport.signature.entity.UploadCEBMessageRequest;
 import io.github.weasleyj.china.eport.sign.AbstractCebMessage;
 import io.github.weasleyj.china.eport.sign.model.request.MessageRequest;
+import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -15,8 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Map;
 
 /**
  * 电子口岸报文推送

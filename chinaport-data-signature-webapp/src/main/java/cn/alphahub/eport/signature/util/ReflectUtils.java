@@ -1,8 +1,5 @@
 package cn.alphahub.eport.signature.util;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.Serializable;
 import java.lang.invoke.SerializedLambda;
 import java.lang.reflect.InvocationTargetException;
@@ -10,6 +7,8 @@ import java.lang.reflect.Method;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.function.Function;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Java反射工具类

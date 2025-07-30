@@ -1,12 +1,11 @@
 package io.github.weasleyj.china.eport.sign.util;
 
-import lombok.extern.slf4j.Slf4j;
-
+import java.io.StringReader;
+import java.io.StringWriter;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import java.io.StringReader;
-import java.io.StringWriter;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Jaxb XML 工具类

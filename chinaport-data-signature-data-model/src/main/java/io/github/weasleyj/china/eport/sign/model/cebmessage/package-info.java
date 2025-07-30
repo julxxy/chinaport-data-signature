@@ -9,7 +9,6 @@
 package io.github.weasleyj.china.eport.sign.model.cebmessage;
 
 import io.github.weasleyj.china.eport.sign.constants.NameSpace;
-
 import javax.xml.bind.annotation.XmlNs;
 import javax.xml.bind.annotation.XmlSchema;
 
