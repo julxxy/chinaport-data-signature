@@ -24,11 +24,6 @@ public interface FrameworkConstant {
     String DEFAULT_TRACE_ID = "X-B3-TraceId";
 
     /**
-     * The Key of default trace id .
-     */
-    String TRACE_ID = "X-B3-TraceId";
-
-    /**
      * /api 的请求前缀 .
      */
     String URL_API_PREFIX_API = "/api";
