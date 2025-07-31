@@ -1,5 +1,5 @@
 #!/bin/bash
-TAG="1.1.1"
+TAG="1.2.0"
 docker stop chinaport-data-signature && docker rm -f chinaport-data-signature
 docker rmi -f weasleyj/chinaport-data-signature:${TAG}-arm64
 docker build -t weasleyj/chinaport-data-signature:${TAG}-arm64 . -f ./Dockerfile
