@@ -86,7 +86,7 @@ public class WebSocketClientHandler extends TextWebSocketHandler {
                     }
                 } else {
                     log.error("电子口岸u-key加签数据失败：{}", JacksonUtil.toJson(responseArgs));
-                    this.sendNotify(new EmailNotifyRecord(webSocketWrapper, ukeyResponse));
+                    this.sendNotification(new EmailNotifyRecord(webSocketWrapper, ukeyResponse));
                 }
             } catch (Exception e) {
                 webSocketWrapper.getSignResult().setSuccess(false);
@@ -103,7 +103,7 @@ public class WebSocketClientHandler extends TextWebSocketHandler {
      * @param record 电子口岸u-key加签失败通知记录
      * @throws Exception ex
      */
-    private void sendNotify(EmailNotifyRecord record) throws Exception {
+    private void sendNotification(EmailNotifyRecord record) throws Exception {
         this.emailNotifyStrategy.notify(record);
     }
 }
