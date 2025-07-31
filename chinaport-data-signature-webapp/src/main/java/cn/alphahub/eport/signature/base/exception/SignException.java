@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 /**
  * 自定义异常
  *
- * @author liuwenjing
+ * @author Julian
  */
 @Data
 @NoArgsConstructor

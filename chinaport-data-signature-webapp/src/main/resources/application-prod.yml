@@ -1,32 +1,11 @@
 logging:
   level:
-    cn.alphahub.eport.signature: debug
-    org.apache.http: error
-    org.springframework.core: warn
-    org.springframework.beans: warn
-    org.springframework.context: warn
-    org.springframework.web: warn
-    org.springframework.web.servlet: info
-    org.springframework.cloud.openfeign: debug
-    org.springframework.web.servlet.DispatcherServlet: debug
-    org.springframework.context.support.PropertySourcesPlaceholderConfigurer: info
-    org.springframework.security.core.userdetails: debug
-    org.springframework.jdbc.datasource.DataSourceTransactionManager: debug
-    jdbc.sqltiming: debug
-    com.alibaba.cloud.nacos.client: error
-    com.alibaba.nacos: error
-    org.springframework.web.reactive.function.client.ExchangeFunctions: trace
-    reactor.netty.http.client.HttpClient: DEBUG
+    org.springframework.web.reactive.function.client.ExchangeFunctions: debug
+    reactor.netty.http.client.HttpClient: info
 
   file:
-    path: ./logs/
+    path: ./logs
     name: ${logging.file.path}/${spring.application.name}.log
-  charset:
-    file: UTF-8
-  logback:
-    rollingpolicy:
-      max-file-size: 15MB
-      clean-history-on-start: false
 
 spring:
   jackson:

@@ -12,7 +12,7 @@ import org.springframework.web.filter.CorsFilter;
 /**
  * 跨域配置类，解决ajax请求跨域问题
  *
- * @author liuwenjing
+ * @author Julian
  * @version 1.1.3
  * @date 2022年2月17日
  */

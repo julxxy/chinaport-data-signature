@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
  * Java反射工具类
  * <p>通过Java实体类的get方法名获取对应的属性名
  *
- * @author liuwenjing
+ * @author Julian
  * @version 1.2
  * @date 2021年6月30日
  */
@@ -191,7 +191,7 @@ public class ReflectUtils {
     /**
      * java实体类方法名获取属性名属性可序列化函数接口
      *
-     * @author liuwenjing
+     * @author Julian
      */
     @FunctionalInterface
     public interface FieldFunction<T, R> extends Function<T, R>, Serializable {
