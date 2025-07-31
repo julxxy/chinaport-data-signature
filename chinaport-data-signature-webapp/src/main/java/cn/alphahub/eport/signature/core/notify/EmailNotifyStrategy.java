@@ -107,6 +107,7 @@ public class EmailNotifyStrategy implements NotifyStrategy<EmailNotifyRecord> {
         }
 
         String htmlBody = """
+                
                 <div>
                     <b>您好，</b><br><br>
                     您的 U-Key 加签操作失败，主要信息如下：<br><br>
@@ -126,6 +127,7 @@ public class EmailNotifyStrategy implements NotifyStrategy<EmailNotifyRecord> {
                     <br>
                     <b>原始错误数据见附件，方便进一步排查。</b><br>
                 </div>
+                
                 """.formatted(errorItemsHtml);
 
         MultipartFile attachment = null;
@@ -177,6 +179,7 @@ public class EmailNotifyStrategy implements NotifyStrategy<EmailNotifyRecord> {
 
         if (hasAutoFixableError) {
             String extraTip = """
+                    
                     <div style="margin-top: 10px; padding: 10px; background: #fff3cd; color: #856404; border: 1px solid #ffeeba; border-radius: 4px;">
                         <b>提示：</b>如遇 “[读卡器底层库]复位读卡器失败” 等错误，程序已自动重启客户端。<br>
                         如果还是不能加签，请手动重启加签 exe 客户端程序。
@@ -199,6 +202,7 @@ public class EmailNotifyStrategy implements NotifyStrategy<EmailNotifyRecord> {
     public void restartUkeyWindowsWebsocketClient(MimeMessageDomain message) {
         ConsoleOutput output = ukeyHealthHelper.fixUkey(Command.RESTART);
         String restartInfoHtml = """
+                
                 <div style="margin-top:18px; padding:12px; background:#fff3cd; border:1px solid #ffeeba; border-radius:4px; color:#856404;">
                     <b>已自动重启 U-Key Windows WebSocket 客户端：</b>
                     <div style="margin-top:6px;">
@@ -209,6 +213,7 @@ public class EmailNotifyStrategy implements NotifyStrategy<EmailNotifyRecord> {
                     <b>CMD 终端信息：</b>
                     <pre style="padding:10px;background:#f8f9fa;border:1px solid #e0e0e0;border-radius:4px;color:#212529;">%s</pre>
                 </div>
+                
                 """.formatted(applicationName, StringUtils.defaultIfBlank(JacksonUtil.toJson(output), "（无终端输出）"));
         message.setText(message.getText() + restartInfoHtml);
     }
