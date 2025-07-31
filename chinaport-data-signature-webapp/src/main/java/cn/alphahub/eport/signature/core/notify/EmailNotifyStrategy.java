@@ -93,6 +93,7 @@ public class EmailNotifyStrategy implements NotifyStrategy<EmailNotifyRecord> {
     public void notifyWhenFailure(EmailNotifyRecord event) throws MessagingException {
         UkeyResponse ukeyErrResponse = event.ukeyResponse();
         SignRequest signRequest = event.webSocketWrapper().getRequest();
+        String traceId = event.webSocketWrapper().getSessionId(); // WebSocket会话ID为traceId
 
         String subject = "【重要提醒】电子口岸 U-Key 加签失败";
 
@@ -107,10 +108,13 @@ public class EmailNotifyStrategy implements NotifyStrategy<EmailNotifyRecord> {
         }
 
         String htmlBody = """
-                
                 <div>
                     <b>您好，</b><br><br>
                     您的 U-Key 加签操作失败，主要信息如下：<br><br>
+                    <div style="color:#888; margin-bottom:10px;">
+                        追踪ID/TraceID：%s
+                    </div>
+                    <br>
                     <b style='color:#d32f2f;'>错误原因：</b>
                     <ul>
                         %s
@@ -127,8 +131,7 @@ public class EmailNotifyStrategy implements NotifyStrategy<EmailNotifyRecord> {
                     <br>
                     <b>原始错误数据见附件，方便进一步排查。</b><br>
                 </div>
-                
-                """.formatted(errorItemsHtml);
+                """.formatted(traceId, errorItemsHtml);
 
         MultipartFile attachment = null;
         String rawErrJson = JacksonUtil.toPrettyJson(ukeyErrResponse);
