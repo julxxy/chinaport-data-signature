@@ -50,6 +50,7 @@ public class RateLimiterWebMvcConfiguration implements WebMvcConfigurer {
         }
 
         @Override
+        @SuppressWarnings("all")
         public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
             RateLimiter limiter = ipRateLimiterManager.getRateLimiterForIp(request);
             // 首次访问，limiter 可能为 null，直接放行
@@ -80,6 +81,7 @@ public class RateLimiterWebMvcConfiguration implements WebMvcConfigurer {
         /**
          * 存储每个 IP 的 RateLimiter
          */
+        @SuppressWarnings("all")
         private final Cache<String, RateLimiter> ipRateLimiters;
 
         /**
@@ -97,6 +99,7 @@ public class RateLimiterWebMvcConfiguration implements WebMvcConfigurer {
                     .build();
         }
 
+        @SuppressWarnings("all")
         public RateLimiter getRateLimiterForIp(HttpServletRequest request) {
             String clientIP = ClientIPUtils.getClientIP(request);
 
@@ -111,6 +114,7 @@ public class RateLimiterWebMvcConfiguration implements WebMvcConfigurer {
             return ipRateLimiters.get(clientIP, this::createRateLimiter);
         }
 
+        @SuppressWarnings("all")
         private RateLimiter createRateLimiter(String ip) {
             return RateLimiter.create(permitsPerSecond);
         }
