@@ -99,6 +99,6 @@ class WebSocketClientHandlerTest {
                 """;
         UkeyResponse response = JSONUtil.toBean(ukeyErrJson, new TypeReference<>() {
         }, true);
-        handler.sendAlertSignFailure(response, messagePayload);
+        handler.sendAlertWhenFailure(response, messagePayload);
     }
 }
