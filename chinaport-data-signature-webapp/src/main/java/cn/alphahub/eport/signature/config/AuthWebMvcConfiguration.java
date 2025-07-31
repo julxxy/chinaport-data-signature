@@ -8,6 +8,7 @@ import java.io.PrintWriter;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
@@ -58,7 +59,7 @@ public class AuthWebMvcConfiguration implements WebMvcConfigurer {
             if (StringUtils.isBlank(request.getHeader(AUTHENTICATION_HEADER))) {
                 unauthorized = true;
                 message = "Missing request header: " + AUTHENTICATION_HEADER;
-            } else if (!StringUtils.equals(request.getHeader(AUTHENTICATION_HEADER), authenticationProperties.getToken())) {
+            } else if (!Strings.CS.equals(request.getHeader(AUTHENTICATION_HEADER), authenticationProperties.getToken())) {
                 unauthorized = true;
                 message = "Invalid token: " + request.getHeader(AUTHENTICATION_HEADER);
             }
