@@ -47,8 +47,14 @@ public class EmailNotifyStrategy implements NotifyStrategy<EmailNotifyRecord> {
             log.warn("电子口岸u-key加签数据失败，通知事件对象为空");
             return NotifyResult.FAILURE;
         }
-        sendAlertWhenFailure(event);
-        return NotifyResult.SUCCESS;
+        try {
+            sendAlertWhenFailure(event);
+            log.info("电子口岸u-key加签数据失败，发送邮件通知成功");
+            return NotifyResult.SUCCESS;
+        } catch (Exception e) {
+            log.error("电子口岸u-key加签数据失败，发送邮件通知异常: {}", e.getMessage(), e);
+            return NotifyResult.FAILURE;
+        }
     }
 
     /**

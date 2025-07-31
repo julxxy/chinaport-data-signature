@@ -1,6 +1,10 @@
 package cn.alphahub.eport.signature.core;
 
+import cn.alphahub.eport.signature.core.notify.EmailNotifyStrategy;
+import cn.alphahub.eport.signature.core.notify.model.EmailNotifyRecord;
+import cn.alphahub.eport.signature.entity.SignRequest;
 import cn.alphahub.eport.signature.entity.UkeyResponse;
+import cn.alphahub.eport.signature.entity.WebSocketWrapper;
 import cn.hutool.core.lang.TypeReference;
 import cn.hutool.json.JSONUtil;
 import org.junit.jupiter.api.AfterEach;
@@ -8,13 +12,21 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 
+/**
+ * 电子口岸u-key加签失败通知策略测试
+ */
 @SpringBootTest
-class WebSocketClientHandlerTest {
+class NotifyStrategyTest {
 
+    /**
+     * 电子口岸u-key加签失败通知策略
+     */
     @Autowired
-    WebSocketClientHandler handler;
+    @Qualifier("emailNotifyStrategy")
+    private EmailNotifyStrategy emailNotifyStrategy;
 
     @BeforeEach
     void setUp() {
@@ -27,6 +39,7 @@ class WebSocketClientHandlerTest {
     @Test
     @DisplayName("复位读卡器失败发送邮件通知")
     void handleTextMessage() {
+
         String ukeyErrJson = """
                 {
                   "_id": 1,
@@ -42,7 +55,7 @@ class WebSocketClientHandlerTest {
                   }
                 }
                 """;
-        String messagePayload = """
+        String xml = """
                 <ceb:CEB311Message guid="YGD8P9-WEASLEY-20230805155746-HOUDF2" version="1.0" xmlns:ceb="http://www.chinaport.gov.cn/ceb" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
                     <ceb:Order>
                         <ceb:OrderHead>
@@ -97,8 +110,13 @@ class WebSocketClientHandlerTest {
                     </ceb:BaseTransfer>
                 </ceb:CEB311Message>
                 """;
+
         UkeyResponse response = JSONUtil.toBean(ukeyErrJson, new TypeReference<>() {
         }, true);
-        handler.sendAlertWhenFailure(response, messagePayload);
+
+        WebSocketWrapper wrapper = new WebSocketWrapper();
+        wrapper.setRequest(new SignRequest(xml));
+
+        emailNotifyStrategy.notify(new EmailNotifyRecord(wrapper, response));
     }
 }
