@@ -4,7 +4,8 @@ logging:
     reactor.netty.http.client.HttpClient: info
 
   file:
-    path: ./logs/
+    path: ./logs
+    name: ${logging.file.path}/${spring.application.name}.log
 
 spring:
   jackson:
