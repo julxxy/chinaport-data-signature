@@ -19,8 +19,8 @@ public class RestTemplateTraceInterceptor implements ClientHttpRequestIntercepto
 
     @Override
     public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution clientHttpRequestExecution) throws IOException {
-        String traceId = Objects.toString(MDC.get(FrameworkConstant.DEFAULT_TRACE_ID), TraceHelper.getTraceId(null));
-        request.getHeaders().set(FrameworkConstant.DEFAULT_TRACE_ID, traceId);
+        String traceId = Objects.toString(MDC.get(FrameworkConstant.TRACE_ID), TraceHelper.getTraceId(null));
+        request.getHeaders().set(FrameworkConstant.TRACE_ID, traceId);
         return clientHttpRequestExecution.execute(request, body);
     }
 
