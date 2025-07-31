@@ -48,7 +48,7 @@ public class EmailNotifyStrategy implements NotifyStrategy<EmailNotifyRecord> {
             return NotifyResult.FAILURE;
         }
         try {
-            sendAlertWhenFailure(event);
+            notifyWhenFailure(event);
             log.info("电子口岸u-key加签数据失败，发送邮件通知成功");
             return NotifyResult.SUCCESS;
         } catch (Exception e) {
@@ -86,7 +86,7 @@ public class EmailNotifyStrategy implements NotifyStrategy<EmailNotifyRecord> {
      * @since 2023-06-10
      */
     @Email
-    public void sendAlertWhenFailure(EmailNotifyRecord event) {
+    public void notifyWhenFailure(EmailNotifyRecord event) {
 
         UkeyResponse ukeyResponse = event.ukeyResponse();
         WebSocketWrapper webSocketWrapper = event.webSocketWrapper();
