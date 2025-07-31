@@ -8,7 +8,7 @@
     <springProperty scope="context" name="PORT" source="server.port" defaultValue="8080"/>
     <springProperty scope="context" name="FILE_PATH" source="logging.file.path" defaultValue="/data/log"/>
     <property name="CONSOLE_LOG_PATTERN" value="%clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}){} %clr(${PID:-}){magenta} %clr([%X{X-B3-TraceId:-}]){cyan} %clr(--- %esb(){APPLICATION_NAME}%esb{APPLICATION_GROUP}[%15.15t] ${LOG_CORRELATION_PATTERN:-}){faint}%clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
-    <property name="FILE_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [${APPLICATION_NAME}] [%pid] [%X{X-B3-TraceId:-}] %contextName [%thread] %-5level %logger{36} [%file:%line] - %msg %ex%n"/>
+    <property name="FILE_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [${APPLICATION_NAME}] [${PID}] [%X{X-B3-TraceId:-}] %contextName [%thread] %-5level %logger{36} [%file:%line] - %msg %ex%n"/>
 
     <!-- 非生产环境 -->
     <springProfile name="default,local,dev,test,lwj">
