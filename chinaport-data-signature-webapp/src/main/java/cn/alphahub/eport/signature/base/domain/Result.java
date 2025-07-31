@@ -2,8 +2,6 @@ package cn.alphahub.eport.signature.base.domain;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -13,7 +11,7 @@ import lombok.ToString;
  * <p>通用面向对象基础返回数据封装</p>
  *
  * @param <T> 返回数据对象
- * @author liuwenjing
+ * @author Julian
  * @version 1.2.0
  * @date 2022年2月11日
  * @see AbstractResult
@@ -116,7 +114,6 @@ public final class Result<T> extends AbstractResult<T> implements Serializable {
         result.setCode(code);
         result.setMessage(msg);
         result.setSuccess(success);
-        result.setTimestamp(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(LocalDateTime.now()));
         result.setData(data);
         return result;
     }

@@ -33,7 +33,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
  * <ul><li>全参数构造函数注入IOC</li></ul>
  *
  * @author weasley
- * @version 1.0
+ * @version 1.2.0
  * @date 2022/2/15
  */
 @Slf4j
@@ -91,7 +91,8 @@ public class WebSocketClientHandler extends TextWebSocketHandler {
                         webSocketWrapper.getSignResult().setX509Certificate(certificateHandler.getX509Certificate(ukeyResponse.get_method()));
                     }
                 } else {
-                    sendAlertSignFailure(ukeyResponse, message.getPayload());
+                    log.error("电子口岸u-key加签数据失败：{}", JacksonUtil.toJson(responseArgs));
+                    sendAlertSignFailure(ukeyResponse, getUkeySignPayload(webSocketWrapper));
                 }
             } catch (Exception e) {
                 webSocketWrapper.getSignResult().setSuccess(false);
@@ -163,8 +164,9 @@ public class WebSocketClientHandler extends TextWebSocketHandler {
                 }
             }
             StringBuilder text = new StringBuilder()
-                    .append("原始错误：\n").append(errorMessage).append("\n")
-                    .append("数据载荷：\n").append(payload).append("\n");
+                    .append("原始错误:\n").append(errorMessage).append("\n")
+                    .append("------------------------------\n")
+                    .append("数据载荷:\n").append(payload).append("\n");
             if (existsError) {
                 message.setText(text.append("提示，如遇 “[读卡器底层库]复位读卡器失败” 等错误，程序自动重启客户端后如果还是不能加签，请手动重启加签exe客户端程序。").toString());
             } else {
@@ -172,6 +174,24 @@ public class WebSocketClientHandler extends TextWebSocketHandler {
             }
             emailTemplate.send(message);
         }
+    }
+
+    /**
+     * 获取u-key加签的消息负载
+     *
+     * @since 1.2.0
+     */
+    private String getUkeySignPayload(WebSocketWrapper wrapper) {
+        if (wrapper == null || wrapper.getRequest() == null) {
+            return "Request is null";
+        }
+        String ukeyPayload = Objects.toString(wrapper.getPayload(), "Payload is null");
+        String requestData = Objects.toString(JacksonUtil.toJson(wrapper.getRequest()), "Request data is null");
+        return """
+                Ukey加签负载: %s
+                
+                应用请求负载: %s
+                """.formatted(ukeyPayload, requestData);
     }
 
     /**

@@ -1,6 +1,7 @@
 package cn.alphahub.eport.signature.config;
 
 import cn.alphahub.eport.signature.base.domain.Result;
+import cn.alphahub.eport.signature.base.utils.TraceHelper;
 import cn.alphahub.eport.signature.util.ClientIPUtils;
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
@@ -60,7 +61,9 @@ public class RateLimiterWebMvcConfiguration implements WebMvcConfigurer {
                 log.warn("触发限流，客户端IP: {}", ClientIPUtils.getClientIP(request));
                 response.setContentType("application/json;charset=utf-8");
                 PrintWriter writer = response.getWriter();
-                writer.println(toJson(Result.error(TOO_MANY_REQUESTS.value(), TOO_MANY_REQUESTS.getReasonPhrase())));
+                Result<Object> result = Result.error(TOO_MANY_REQUESTS.value(), TOO_MANY_REQUESTS.getReasonPhrase());
+                result.setTraceId(TraceHelper.getTraceId(request));
+                writer.println(toJson(result));
                 writer.flush();
                 writer.close();
                 return false;

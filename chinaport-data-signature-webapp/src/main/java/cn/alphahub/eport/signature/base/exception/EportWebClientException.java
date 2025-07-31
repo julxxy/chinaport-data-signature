@@ -16,7 +16,7 @@ public class EportWebClientException extends RuntimeException {
     /**
      * 异常消息
      */
-    private String msg;
+    private final String msg;
     /**
      * 错误码, 默认: 500
      */
