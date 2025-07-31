@@ -26,9 +26,9 @@ public final class TraceHelper {
     }
 
     public static String getTraceId(@Nullable HttpServletRequest request) {
-        String traceId = MDC.get(FrameworkConstant.DEFAULT_TRACE_ID);
+        String traceId = MDC.get(FrameworkConstant.TRACE_ID);
         if (traceId == null) {
-            traceId = (request != null) ? Objects.toString(request.getHeader(FrameworkConstant.DEFAULT_TRACE_ID), generateTraceId()) : generateTraceId();
+            traceId = (request != null) ? Objects.toString(request.getHeader(FrameworkConstant.TRACE_ID), generateTraceId()) : generateTraceId();
         }
         log.trace("Trace ID: {}", traceId);
         return traceId;

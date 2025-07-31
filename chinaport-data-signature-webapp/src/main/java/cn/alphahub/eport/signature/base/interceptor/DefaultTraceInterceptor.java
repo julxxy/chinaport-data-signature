@@ -19,16 +19,16 @@ public class DefaultTraceInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String traceId = TraceHelper.getTraceId(request);
-        MDC.put(FrameworkConstant.DEFAULT_TRACE_ID, traceId);
-        if (!response.containsHeader(FrameworkConstant.DEFAULT_TRACE_ID)) {
-            response.setHeader(FrameworkConstant.DEFAULT_TRACE_ID, traceId);
+        MDC.put(FrameworkConstant.TRACE_ID, traceId);
+        if (!response.containsHeader(FrameworkConstant.TRACE_ID)) {
+            response.setHeader(FrameworkConstant.TRACE_ID, traceId);
         }
         return true;
     }
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-        MDC.remove(FrameworkConstant.DEFAULT_TRACE_ID);
+        MDC.remove(FrameworkConstant.TRACE_ID);
     }
 
 }

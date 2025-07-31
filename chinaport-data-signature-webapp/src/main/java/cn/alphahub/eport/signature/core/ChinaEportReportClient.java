@@ -413,7 +413,7 @@ public class ChinaEportReportClient {
         // 请求签名加密，2次组装数据, 请求加密（包含第1，2段加密）
         String payload = signHandler.getSignDataParameter(ukeyRequest);
         SignResult signResult = signHandler.sign(ukeyRequest, payload);
-        // 线程uppark时间可能会失败，增强方法兜底
+        // 线程 uppark 时间可能会失败，增强方法兜底
         if (Boolean.FALSE.equals(signResult.getSuccess())) {
             this.enhanceSignResultIfDefective(signResult, sourceXml);
         }

@@ -16,6 +16,12 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class WebSocketWrapper implements Serializable {
     /**
+     * WebSocket会话ID（traceId）
+     *
+     * @since 1.2.0
+     */
+    private String sessionId;
+    /**
      * websocket发送的数据载荷
      */
     private String payload;

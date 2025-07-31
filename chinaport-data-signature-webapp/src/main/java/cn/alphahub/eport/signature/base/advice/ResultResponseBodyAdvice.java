@@ -37,7 +37,7 @@ public class ResultResponseBodyAdvice implements ResponseBodyAdvice<Object> {
                                   Class<? extends HttpMessageConverter<?>> selectedConverterType,
                                   ServerHttpRequest request,
                                   ServerHttpResponse response) {
-        String traceId = MDC.get(FrameworkConstant.DEFAULT_TRACE_ID);
+        String traceId = MDC.get(FrameworkConstant.TRACE_ID);
 
         if (null == body) {
             Result<Object> result = Result.ok(null);

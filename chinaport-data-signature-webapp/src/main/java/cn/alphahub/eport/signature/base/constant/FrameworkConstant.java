@@ -21,7 +21,7 @@ public interface FrameworkConstant {
     /**
      * 默认的 trace id.
      */
-    String DEFAULT_TRACE_ID = "X-B3-TraceId";
+    String TRACE_ID = "X-B3-TraceId";
 
     /**
      * /api 的请求前缀 .

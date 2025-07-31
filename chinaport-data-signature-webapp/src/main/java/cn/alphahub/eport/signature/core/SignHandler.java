@@ -1,5 +1,6 @@
 package cn.alphahub.eport.signature.core;
 
+import cn.alphahub.eport.signature.base.constant.FrameworkConstant;
 import cn.alphahub.eport.signature.config.UkeyInitialConfig;
 import cn.alphahub.eport.signature.config.UkeyProperties;
 import cn.alphahub.eport.signature.entity.SignRequest;
@@ -21,6 +22,8 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
+import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
@@ -75,8 +78,8 @@ public class SignHandler {
         if (StringUtils.isBlank(request.getData())) {
             throw new IllegalArgumentException("加签数据请求入参能为空!");
         }
-        boolean isSignXmlString = XMLValidator.isValidXML(request.getData()) || StringUtils.startsWith(request.getData(), "<ceb:CEB");
-        boolean isSign179String = StringUtils.startsWith(request.getData(), "\"sessionID\"");
+        boolean isSignXmlString = XMLValidator.isValidXML(request.getData()) || Strings.CS.startsWith(request.getData(), "<ceb:CEB");
+        boolean isSign179String = Strings.CS.startsWith(request.getData(), "\"sessionID\"");
         if (isSignXmlString && !isSign179String) {
             return true;
         }
@@ -105,29 +108,31 @@ public class SignHandler {
     public SignResult sign(@Valid SignRequest request, @NotBlank(message = "websocket发送的数据载荷不能为空") String payload) {
         log.info("收到u-key加签数据: {}", payload);
 
-        WebSocketWrapper wrapper = webSocketClientHandler.getWebSocketWrapper();
-        wrapper.setPayload(payload);
-        wrapper.setRequest(request);
-        wrapper.setSignResult(new SignResult());
-        wrapper.setThreadReference(new AtomicReference<>(Thread.currentThread()));
+        WebSocketWrapper wsWrapper = webSocketClientHandler.getWebSocketWrapper();
+        wsWrapper.setPayload(payload);
+        wsWrapper.setRequest(request);
+        wsWrapper.setSignResult(new SignResult());
+        wsWrapper.setThreadReference(new AtomicReference<>(Thread.currentThread()));
+        wsWrapper.setSessionId(MDC.get(FrameworkConstant.TRACE_ID));
+
         if (SignHandler.isSignXml(request)) {
-            wrapper.getSignResult().setDigestValue(SignatureHandler.getDigestValueOfCEBXxxMessage(request.getData()));
-            wrapper.getSignResult().setSignatureNode(SignatureHandler.getSignatureNodeBeforeSend(request));
+            wsWrapper.getSignResult().setDigestValue(SignatureHandler.getDigestValueOfCEBXxxMessage(request.getData()));
+            wsWrapper.getSignResult().setSignatureNode(SignatureHandler.getSignatureNodeBeforeSend(request));
         }
 
-        WebSocketConnectionManager manager = new WebSocketConnectionManager(standardWebSocketClient, webSocketClientHandler, ukeyProperties.getWsUrl());
-        manager.start();
+        WebSocketConnectionManager wsConnManager = new WebSocketConnectionManager(standardWebSocketClient, webSocketClientHandler, ukeyProperties.getWsUrl());
+        wsConnManager.start();
 
         try {
-            LockSupport.parkNanos(wrapper.getThreadReference().get(), 1000 * 1000 * 1000 * 5L);
+            LockSupport.parkNanos(wsWrapper.getThreadReference().get(), 1000 * 1000 * 1000 * 5L);
         } catch (Exception e) {
             log.error("线程自动unpark异常 {}", e.getLocalizedMessage(), e);
-            wrapper.getSignResult().setSuccess(false);
+            wsWrapper.getSignResult().setSuccess(false);
         } finally {
-            manager.stop();
+            wsConnManager.stop();
         }
 
-        return wrapper.getSignResult();
+        return wsWrapper.getSignResult();
     }
 
     /**
@@ -136,9 +141,11 @@ public class SignHandler {
      * @apiNote 发送任意数据给ukey，实时响应结果
      */
     public Args getUkeyResponseArgs(UkeyRequest ukeyRequest) {
-        AtomicReference<UkeyResponseArgsWrapper> reference = new AtomicReference<>();
-        reference.set(new UkeyResponseArgsWrapper(Thread.currentThread(), new Args()));
-        WebSocketConnectionManager webSocketConnectionManager = new WebSocketConnectionManager(standardWebSocketClient, new TextWebSocketHandler() {
+
+        AtomicReference<UkeyResponseArgsWrapper> ref = new AtomicReference<>();
+        ref.set(new UkeyResponseArgsWrapper(Thread.currentThread(), new Args(), MDC.get(FrameworkConstant.TRACE_ID)));
+
+        WebSocketConnectionManager wsConnManager = new WebSocketConnectionManager(standardWebSocketClient, new TextWebSocketHandler() {
             @Override
             public void afterConnectionEstablished(WebSocketSession session) throws Exception {
                 session.sendMessage(new TextMessage(JSONUtil.toJsonStr(ukeyRequest)));
@@ -146,27 +153,31 @@ public class SignHandler {
 
             @Override
             protected void handleTextMessage(WebSocketSession session, TextMessage message) {
+                MDC.put(FrameworkConstant.TRACE_ID, ref.get().getSessionId());
                 UkeyResponse response = JSONUtil.toBean(message.getPayload(), new TypeReference<>() {
                 }, true);
                 try {
                     if (Objects.equals(response.get_id(), ukeyRequest.get_id())) {
                         log.warn("从电子口岸ukey中获取获取到数据: {}", response.get_args());
-                        reference.get().setResponseArgs(response.get_args());
+                        ref.get().setResponseArgs(response.get_args());
                     }
                 } catch (Exception e) {
                     log.error("唤醒线程异常 {}", e.getLocalizedMessage(), e);
                 }
             }
         }, ukeyProperties.getWsUrl());
-        webSocketConnectionManager.start();
+
+        wsConnManager.start();
+
         try {
-            LockSupport.parkNanos(reference.get().getThread(), 1000 * 1000 * 1000 * 1L);
+            LockSupport.parkNanos(ref.get().getThread(), 1000 * 1000 * 1000 * 1L);
         } catch (Exception e) {
             log.error("线程自动unpark异常 {}", e.getLocalizedMessage(), e);
         } finally {
-            webSocketConnectionManager.stop();
+            wsConnManager.stop();
         }
-        return reference.get().getResponseArgs();
+
+        return ref.get().getResponseArgs();
     }
 
 }

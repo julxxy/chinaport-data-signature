@@ -15,11 +15,14 @@ import lombok.Getter;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
+import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
+
+import static cn.alphahub.eport.signature.base.constant.FrameworkConstant.TRACE_ID;
 
 /**
  * 加签websocket客户端基类
@@ -63,13 +66,15 @@ public class WebSocketClientHandler extends TextWebSocketHandler {
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         super.afterConnectionEstablished(session);
-        log.warn("已和[{}]建立websocket连接...", ukeyProperties.getWsUrl());
+        MDC.put(TRACE_ID, webSocketWrapper.getSessionId());
+        log.warn("已和 [{}] 建立 websocket 连接...", ukeyProperties.getWsUrl());
         session.sendMessage(new TextMessage(webSocketWrapper.getPayload()));
     }
 
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
         super.handleTextMessage(session, message);
+        MDC.put(TRACE_ID, webSocketWrapper.getSessionId());
         log.warn("收到ukey响应数据: {}", message.getPayload());
         UkeyResponse ukeyResponse = JSONUtil.toBean(message.getPayload(), new TypeReference<>() {
         }, true);
