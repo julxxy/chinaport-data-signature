@@ -125,3 +125,5 @@ echo -e "${YELLOW}💡 如需清理构建器，运行: docker buildx rm $BUILDER
 echo -e "${YELLOW}💡 查看镜像详情: docker buildx imagetools inspect ${IMAGE}:${TAG}${NC}"
 
 log_success "脚本执行完成！"
+
+cd .. & mvn clean
