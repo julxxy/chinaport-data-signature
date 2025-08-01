@@ -21,24 +21,24 @@
         <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <signature-data-model.version>1.0.8</signature-data-model.version>
         <spring-cloud.version>2025.0.0</spring-cloud.version>
-        <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
-        <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
+        <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
+        <maven-source-plugin.version>3.3.1</maven-source-plugin.version>
         <hutool-all.version>5.8.39</hutool-all.version>
         <smart-doc.version>2.7.3</smart-doc.version>
-        <xmlsec.version>3.0.3</xmlsec.version>
+        <xmlsec.version>3.0.6</xmlsec.version>
         <lombok.version>1.18.38</lombok.version>
-        <snakeyaml.version>2.2</snakeyaml.version>
+        <snakeyaml.version>2.4</snakeyaml.version>
         <jna.version>3.0.9</jna.version>
         <dtt-utils.version>1.4.1</dtt-utils.version>
         <caffeine.version>3.2.2</caffeine.version>
         <commons-lang3.version>3.18.0</commons-lang3.version>
-        <commons-io.version>2.15.1</commons-io.version>
+        <commons-io.version>2.19.0</commons-io.version>
         <commons-collections4.version>4.5.0</commons-collections4.version>
         <multiple-email.version>3.0.0</multiple-email.version>
-        <signature-data-model.version>1.0.7</signature-data-model.version>
         <jaxb-api.version>2.4.0-b180830.0359</jaxb-api.version>
-        <jaxb-runtime.version>2.3.8</jaxb-runtime.version>
+        <jaxb-runtime.version>2.3.9</jaxb-runtime.version>
         <guava.version>33.4.8-jre</guava.version>
         <sonar.host.url>http://192.168.31.140:9001</sonar.host.url>
         <sonar.login>admin</sonar.login>
@@ -49,7 +49,7 @@
         <sonar.links.homepage>${project.url}</sonar.links.homepage>
         <sonar.sourceEncoding>${project.build.sourceEncoding}</sonar.sourceEncoding>
         <sonar.exclusions>src/test/**/*,*.js,*.css,*.html,*.vue,*.bat,*.cmd,*.md,*.NET,*.cpp</sonar.exclusions>
-        <sonar-maven-plugin.version>3.9.0.2155</sonar-maven-plugin.version>
+        <sonar-maven-plugin.version>5.1.0.4751</sonar-maven-plugin.version>
     </properties>
 
     <dependencies>

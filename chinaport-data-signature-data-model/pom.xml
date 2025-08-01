@@ -5,7 +5,7 @@
 
     <groupId>io.github.weasley-j</groupId>
     <artifactId>chinaport-data-signature-data-model</artifactId>
-    <version>1.0.7</version>
+    <version>1.0.8</version>
     <name>chinaport-data-signature-data-model</name>
     <packaging>jar</packaging>
     <url>https://github.com/julxxy/chinaport-data-signature/tree/main/chinaport-data-signature-data-model</url>
@@ -22,8 +22,8 @@
     <developers>
         <developer>
             <name>Weasley J</name>
-            <email>1432689025@qq.com</email>
-            <url>https://github.com/Weasley-J</url>
+            <email>julxxy@outlook.com</email>
+            <url>https://github.com/julxxy</url>
         </developer>
     </developers>
 
@@ -36,14 +36,14 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <lombok.version>1.18.28</lombok.version>
-        <slf4j-api.version>2.0.7</slf4j-api.version>
+        <lombok.version>1.18.38</lombok.version>
+        <slf4j-api.version>2.0.17</slf4j-api.version>
         <jaxb-api.version>2.4.0-b180830.0359</jaxb-api.version>
-        <jaxb-runtime.version>2.3.8</jaxb-runtime.version>
-        <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
-        <nexus-staging.version>1.6.13</nexus-staging.version>
-        <maven-javadoc.version>3.4.0</maven-javadoc.version>
-        <maven-gpg.version>3.0.1</maven-gpg.version>
+        <jaxb-runtime.version>2.3.9</jaxb-runtime.version>
+        <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
+        <nexus-staging.version>1.7.0</nexus-staging.version>
+        <maven-javadoc.version>3.11.2</maven-javadoc.version>
+        <maven-gpg.version>3.2.8</maven-gpg.version>
     </properties>
 
     <dependencies>

@@ -36,8 +36,9 @@ import org.springframework.web.multipart.MultipartFile;
  * @date 2025/7/31 17:29
  */
 @Slf4j
-@Component("emailNotifyStrategy")
+@Component(EmailNotifyStrategy.NAME)
 public class EmailNotifyStrategy implements NotifyStrategy<EmailNotifyRecord> {
+    public final static String NAME = "emailNotifyStrategy";
 
     @Autowired
     private EmailTemplate emailTemplate;
@@ -45,6 +46,7 @@ public class EmailNotifyStrategy implements NotifyStrategy<EmailNotifyRecord> {
     private EmailProperties emailProperties;
     @Autowired
     private UkeyHealthHelper ukeyHealthHelper;
+
     /**
      * 应用名称，用于邮件通知主题
      */
@@ -53,13 +55,16 @@ public class EmailNotifyStrategy implements NotifyStrategy<EmailNotifyRecord> {
 
     @Override
     public NotifyResult notify(EmailNotifyRecord event) {
+        if (emailProperties.getEnable().equals(false)) {
+            log.warn("U-Key 加签失败通知邮件已禁用，跳过发送, 如需启用请设置 spring.mail.enable=true");
+            return NotifyResult.SKIP;
+        }
         if (event == null) {
             log.warn("U-Key 加签失败，通知事件为空");
             return NotifyResult.FAILURE;
         }
         try {
             notifyWhenFailure(event);
-            log.info("U-Key 加签失败，发送带附件HTML邮件通知成功");
             return NotifyResult.SUCCESS;
         } catch (Exception e) {
             log.error("U-Key 加签失败，发送邮件通知异常: {}", e.getMessage(), e);
@@ -90,7 +95,7 @@ public class EmailNotifyStrategy implements NotifyStrategy<EmailNotifyRecord> {
      * @implNote [读卡器底层库]复位读卡器失败会自动重启u-key的Windows进程，希望能提升自我容灾机制
      * @since 1.2.0
      */
-    public void notifyWhenFailure(EmailNotifyRecord event) throws MessagingException {
+    private void notifyWhenFailure(EmailNotifyRecord event) throws MessagingException {
         UkeyResponse ukeyErrResponse = event.ukeyResponse();
         SignRequest signRequest = event.webSocketWrapper().getRequest();
         String traceId = event.webSocketWrapper().getSessionId(); // WebSocket会话ID为traceId

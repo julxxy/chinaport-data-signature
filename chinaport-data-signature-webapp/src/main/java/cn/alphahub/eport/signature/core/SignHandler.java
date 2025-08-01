@@ -3,6 +3,8 @@ package cn.alphahub.eport.signature.core;
 import cn.alphahub.eport.signature.base.constant.FrameworkConstant;
 import cn.alphahub.eport.signature.config.UkeyInitialConfig;
 import cn.alphahub.eport.signature.config.UkeyProperties;
+import cn.alphahub.eport.signature.core.notify.EmailNotifyStrategy;
+import cn.alphahub.eport.signature.core.notify.model.EmailNotifyRecord;
 import cn.alphahub.eport.signature.entity.SignRequest;
 import cn.alphahub.eport.signature.entity.SignResult;
 import cn.alphahub.eport.signature.entity.UkeyRequest;
@@ -25,6 +27,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Strings;
 import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.socket.TextMessage;
@@ -32,6 +35,8 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.client.WebSocketConnectionManager;
 import org.springframework.web.socket.client.standard.StandardWebSocketClient;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
+
+import static cn.alphahub.dtt.plus.util.JacksonUtil.toPrettyJson;
 
 
 /**
@@ -54,6 +59,12 @@ public class SignHandler {
     private WebSocketClientHandler webSocketClientHandler;
     @Autowired
     private StandardWebSocketClient standardWebSocketClient;
+    /**
+     * 电子口岸u-key加签失败通知策略
+     */
+    @Autowired
+    @Qualifier(EmailNotifyStrategy.NAME)
+    private EmailNotifyStrategy emailNotifyStrategy;
 
     /**
      * 获取ukey的socket入参的inData字段
@@ -158,13 +169,36 @@ public class SignHandler {
                 }, true);
                 try {
                     if (Objects.equals(response.get_id(), ukeyRequest.get_id())) {
-                        log.warn("从电子口岸ukey中获取获取到数据: {}", response.get_args());
+                        if (Objects.equals(response.get_args().getResult(), false)) {
+                            log.error("电子口岸ukey加签遇到错误: {}", response.get_args().getError());
+                            this.sendNotify(response);
+                        } else {
+                            log.info("电子口岸ukey返回成功: {}", response.get_args().getData());
+                        }
                         ref.get().setResponseArgs(response.get_args());
                     }
                 } catch (Exception e) {
                     log.error("唤醒线程异常 {}", e.getLocalizedMessage(), e);
                 }
             }
+
+            /**
+             * 发送通知
+             *
+             * @param response ukey响应结果
+             */
+            private void sendNotify(UkeyResponse response) {
+                WebSocketWrapper wsWrapper = new WebSocketWrapper();
+                wsWrapper.setSessionId(ref.get().getSessionId());
+                wsWrapper.setPayload(toPrettyJson(ukeyRequest.getArgs()));
+                wsWrapper.setThreadReference(new AtomicReference<>(ref.get().getThread()));
+                SignRequest signRequest = new SignRequest(ukeyRequest.get_id(), toPrettyJson(ukeyRequest.getArgs()));
+                wsWrapper.setRequest(signRequest);
+                SignResult signResult = new SignResult().setSuccess(false);
+                wsWrapper.setSignResult(signResult);
+                emailNotifyStrategy.notify(new EmailNotifyRecord(wsWrapper, response));
+            }
+
         }, ukeyProperties.getWsUrl());
 
         wsConnManager.start();

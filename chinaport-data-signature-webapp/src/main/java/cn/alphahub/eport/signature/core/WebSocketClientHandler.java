@@ -54,7 +54,7 @@ public class WebSocketClientHandler extends TextWebSocketHandler {
      * 电子口岸u-key加签失败通知策略
      */
     @Autowired
-    @Qualifier("emailNotifyStrategy")
+    @Qualifier(EmailNotifyStrategy.NAME)
     private EmailNotifyStrategy emailNotifyStrategy;
 
     public WebSocketClientHandler(UkeyProperties ukeyProperties, WebSocketWrapper webSocketWrapper, CertificateHandler certificateHandler) {

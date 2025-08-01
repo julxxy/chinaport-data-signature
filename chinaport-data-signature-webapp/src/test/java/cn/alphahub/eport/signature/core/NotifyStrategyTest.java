@@ -25,7 +25,7 @@ class NotifyStrategyTest {
      * 电子口岸u-key加签失败通知策略
      */
     @Autowired
-    @Qualifier("emailNotifyStrategy")
+    @Qualifier(EmailNotifyStrategy.NAME)
     private EmailNotifyStrategy emailNotifyStrategy;
 
     @BeforeEach

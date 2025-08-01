@@ -107,7 +107,7 @@ public class UkeyResponse implements Serializable {
         }
 
         public Boolean getResult() {
-            return Result;
+            return Result != null && Result;
         }
 
         public void setResult(Boolean result) {
@@ -115,7 +115,7 @@ public class UkeyResponse implements Serializable {
         }
 
         public List<String> getData() {
-            return Data;
+            return null == Data ? List.of() : Data;
         }
 
         public void setData(List<String> data) {
@@ -123,7 +123,7 @@ public class UkeyResponse implements Serializable {
         }
 
         public List<String> getError() {
-            return Error;
+            return Error == null ? List.of() : Error;
         }
 
         public void setError(List<String> error) {
