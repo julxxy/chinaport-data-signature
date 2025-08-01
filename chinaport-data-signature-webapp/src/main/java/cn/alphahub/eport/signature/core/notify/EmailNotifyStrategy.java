@@ -90,7 +90,7 @@ public class EmailNotifyStrategy implements NotifyStrategy<EmailNotifyRecord> {
      * @implNote [读卡器底层库]复位读卡器失败会自动重启u-key的Windows进程，希望能提升自我容灾机制
      * @since 1.2.0
      */
-    public void notifyWhenFailure(EmailNotifyRecord event) throws MessagingException {
+    private void notifyWhenFailure(EmailNotifyRecord event) throws MessagingException {
         UkeyResponse ukeyErrResponse = event.ukeyResponse();
         SignRequest signRequest = event.webSocketWrapper().getRequest();
         String traceId = event.webSocketWrapper().getSessionId(); // WebSocket会话ID为traceId

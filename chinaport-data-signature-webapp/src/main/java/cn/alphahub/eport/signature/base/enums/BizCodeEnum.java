@@ -31,6 +31,10 @@ public enum BizCodeEnum {
      * 参数格式校验异常
      */
     VALID_EXCEPTION(10001, "参数格式校验异常"),
+    /**
+     * 加签失败
+     */
+    SIGN_FAIL(10002, "加签失败"),
     ;
     /**
      * 错误码

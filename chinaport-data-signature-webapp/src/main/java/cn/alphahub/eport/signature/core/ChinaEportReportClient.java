@@ -53,6 +53,7 @@ import org.springframework.stereotype.Component;
 
 import static cn.alphahub.dtt.plus.util.JacksonUtil.readValue;
 import static cn.alphahub.dtt.plus.util.JacksonUtil.toJson;
+import static cn.alphahub.eport.signature.base.enums.BizCodeEnum.SIGN_FAIL;
 import static cn.alphahub.eport.signature.core.CertificateHandler.SING_DATA_METHOD;
 
 /**
@@ -212,7 +213,7 @@ public class ChinaEportReportClient {
         SignResult signResult = signHandler.sign(signRequest, signParams);
 
         if (Boolean.FALSE.equals(signResult.getSuccess())) {
-            throw new SignException("海关 179 数据抓取加签失败, ukey加签入参: " + signParams + ", 原始入参: " + toJson(customs179Request));
+            throw new SignException("海关 179 数据抓取加签失败, ukey加签入参: " + signParams + ", 原始入参: " + toJson(customs179Request), SIGN_FAIL.getCode());
         }
         customs179Request.setCertNo(signResult.getCertNo());
         customs179Request.setSignValue(signResult.getSignatureValue());
@@ -444,6 +445,12 @@ public class ChinaEportReportClient {
         params.put("passwd", ukeyProperties.getPassword());
         Args args1 = signHandler.getUkeyResponseArgs(new UkeyRequest("cus-sec_SpcSignDataAsPEM", params));
         Args args2 = signHandler.getUkeyResponseArgs(new UkeyRequest("cus-sec_SpcGetSignCertAsPEM", new HashMap<>()));
+        if (args1.getResult() == null || args1.getResult().equals(false)) {
+            throw new SignException("电子口岸ukey加签失败", SIGN_FAIL.getCode());
+        }
+        if (args1.getResult() == null || args2.getResult().equals(false)) {
+            throw new SignException("电子口岸ukey获取证书失败", SIGN_FAIL.getCode());
+        }
         signResult.setCertNo(args1.getData().get(1));
         signResult.setSignatureValue(args1.getData().get(0));
         signResult.setX509Certificate(args2.getData().get(0));
