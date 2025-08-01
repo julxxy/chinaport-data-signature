@@ -169,7 +169,6 @@ public class SignHandler {
                 }, true);
                 try {
                     if (Objects.equals(response.get_id(), ukeyRequest.get_id())) {
-                        log.warn("从电子口岸ukey中获取获取到数据: {} {}", response.get_args(), response);
                         if (Objects.equals(response.get_args().getResult(), false)) {
                             log.error("电子口岸ukey加签遇到错误: {}", response.get_args().getError());
                             this.sendNotify(response);
