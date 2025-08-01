@@ -60,7 +60,6 @@ public class EmailNotifyStrategy implements NotifyStrategy<EmailNotifyRecord> {
         }
         try {
             notifyWhenFailure(event);
-            log.info("U-Key 加签失败，发送带附件HTML邮件通知成功");
             return NotifyResult.SUCCESS;
         } catch (Exception e) {
             log.error("U-Key 加签失败，发送邮件通知异常: {}", e.getMessage(), e);
