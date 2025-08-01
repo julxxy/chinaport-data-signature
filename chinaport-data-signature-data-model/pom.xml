@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.github.weasley-j</groupId>
     <artifactId>chinaport-data-signature-data-model</artifactId>
     <version>1.0.8</version>
-    <name>chinaport-data-signature-data-model</name>
     <packaging>jar</packaging>
-    <url>https://github.com/julxxy/chinaport-data-signature/tree/main/chinaport-data-signature-data-model</url>
+    <name>chinaport-data-signature-data-model</name>
     <description>中国电子口岸加签服务数据模型: 1. 海关 179 数据抓取; 2. 海关总署xml报文</description>
+    <url>https://github.com/julxxy/chinaport-data-signature/tree/main/chinaport-data-signature-data-model</url>
 
     <licenses>
         <license>
             <name>GNU GENERAL PUBLIC LICENSE, Version 3</name>
-            <url>https://github.com/julxxy/chinaport-data-signature/blob/main/chinaport-data-signature-data-model/LICENSE</url>
+            <url>
+                https://github.com/julxxy/chinaport-data-signature/blob/main/chinaport-data-signature-data-model/LICENSE
+            </url>
             <distribution>repo</distribution>
         </license>
     </licenses>
@@ -29,8 +32,8 @@
 
     <scm>
         <url>https://github.com/julxxy/chinaport-data-signature/tree/main/chinaport-data-signature-data-model</url>
-        <connection>https://github.com/julxxy/chinaport-data-signature.git</connection>
-        <developerConnection>https://github.com/julxxy/chinaport-data-signature</developerConnection>
+        <connection>scm:git:https://github.com/julxxy/chinaport-data-signature.git</connection>
+        <developerConnection>scm:git:https://github.com/julxxy/chinaport-data-signature.git</developerConnection>
     </scm>
 
     <properties>
@@ -41,9 +44,9 @@
         <jaxb-api.version>2.4.0-b180830.0359</jaxb-api.version>
         <jaxb-runtime.version>2.3.9</jaxb-runtime.version>
         <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
-        <nexus-staging.version>1.7.0</nexus-staging.version>
-        <maven-javadoc.version>3.11.2</maven-javadoc.version>
-        <maven-gpg.version>3.2.8</maven-gpg.version>
+        <maven-javadoc-plugin.version>3.11.2</maven-javadoc-plugin.version>
+        <maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>
+        <central-publishing-maven-plugin.version>0.8.0</central-publishing-maven-plugin.version>
     </properties>
 
     <dependencies>
@@ -56,6 +59,7 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>javax.xml.bind</groupId>
@@ -69,27 +73,7 @@
         </dependency>
     </dependencies>
 
-    <distributionManagement>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
-        <repository>
-            <id>ossrh</id>
-            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-        </repository>
-    </distributionManagement>
-
     <build>
-        <finalName>${project.artifactId}</finalName>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <includes>
-                    <include>**/*</include>
-                </includes>
-            </resource>
-        </resources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -98,17 +82,6 @@
                 <configuration>
                     <source>8</source>
                     <target>8</target>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.sonatype.plugins</groupId>
-                <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>${nexus-staging.version}</version>
-                <extensions>true</extensions>
-                <configuration>
-                    <serverId>ossrh</serverId>
-                    <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
-                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
                 </configuration>
             </plugin>
             <plugin>
@@ -126,7 +99,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>${maven-javadoc.version}</version>
+                <version>${maven-javadoc-plugin.version}</version>
                 <configuration>
                     <show>private</show>
                     <nohelp>true</nohelp>
@@ -154,7 +127,7 @@
                 <executions>
                     <execution>
                         <id>attach-javadoc</id>
-                        <phase>compile</phase>
+                        <phase>verify</phase>
                         <goals>
                             <goal>jar</goal>
                         </goals>
@@ -164,7 +137,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
-                <version>${maven-gpg.version}</version>
+                <version>${maven-gpg-plugin.version}</version>
                 <executions>
                     <execution>
                         <id>sign-artifacts</id>
@@ -174,6 +147,16 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
+                <version>${central-publishing-maven-plugin.version}</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <publishingServerId>central</publishingServerId>
+                    <autoPublish>true</autoPublish>
+                </configuration>
             </plugin>
         </plugins>
     </build>
