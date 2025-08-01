@@ -36,8 +36,9 @@ import org.springframework.web.multipart.MultipartFile;
  * @date 2025/7/31 17:29
  */
 @Slf4j
-@Component("emailNotifyStrategy")
+@Component(EmailNotifyStrategy.NAME)
 public class EmailNotifyStrategy implements NotifyStrategy<EmailNotifyRecord> {
+    public final static String NAME = "emailNotifyStrategy";
 
     @Autowired
     private EmailTemplate emailTemplate;
