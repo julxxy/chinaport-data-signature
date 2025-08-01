@@ -60,7 +60,8 @@ if [ -n "$LOGFILE" ]; then
   tail -f "$LOGFILE"
 else
   # 自动生成空日志文件
-  echo "日志文件未生成，自动创建 logs/app.log！"
+  echo "日志文件未生成，自动创建 logs/app.log！$APP_NAME 正在启动中..."
+  mkdir -p logs
   touch logs/app.log
   tail -f logs/app.log
 fi
