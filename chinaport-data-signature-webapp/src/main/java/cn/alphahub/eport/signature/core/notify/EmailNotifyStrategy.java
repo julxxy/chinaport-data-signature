@@ -28,6 +28,8 @@ import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+import static cn.alphahub.dtt.plus.util.JacksonUtil.toJson;
+
 /**
  * 电子口岸U-Key加签失败邮件通知策略
  *
@@ -208,7 +210,12 @@ public class EmailNotifyStrategy implements NotifyStrategy<EmailNotifyRecord> {
      * @since 1.0.9
      */
     public void restartUkeyWindowsWebsocketClient(MimeMessageDomain message) {
-        ConsoleOutput output = ukeyHealthHelper.fixUkey(Command.RESTART);
+
+        ConsoleOutput output = ukeyHealthHelper.fixUkey(Command.STOP);
+        ConsoleOutput startOutput = ukeyHealthHelper.fixUkey(Command.START);
+        output.getErrorOutList().addAll(startOutput.getErrorOutList());
+        output.getStdOutList().addAll(startOutput.getStdOutList());
+
         String restartInfoHtml = """
                 
                 <div style="margin-top:18px; padding:12px; background:#fff3cd; border:1px solid #ffeeba; border-radius:4px; color:#856404;">
@@ -222,7 +229,8 @@ public class EmailNotifyStrategy implements NotifyStrategy<EmailNotifyRecord> {
                     <pre style="padding:10px;background:#f8f9fa;border:1px solid #e0e0e0;border-radius:4px;color:#212529;">%s</pre>
                 </div>
                 
-                """.formatted(applicationName, StringUtils.defaultIfBlank(JacksonUtil.toJson(output), "（无终端输出）"));
+                """.formatted(applicationName, StringUtils.defaultIfBlank(toJson(output), "（无终端输出）"));
+
         message.setText(message.getText() + restartInfoHtml);
     }
 
