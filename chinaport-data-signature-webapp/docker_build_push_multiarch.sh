@@ -1,4 +1,17 @@
-#!/bin/bash
+#!/usr/bin/env zsh
+
+source ~/.zshrc
+if command -v sptn >/dev/null 2>&1; then
+  echo "检测到 sptn 命令，正在执行..."
+  sptn
+else
+  echo "未检测到 sptn 命令，跳过执行"
+fi
+
+cd ..
+SETTINGS="/Users/weasley/Development/program/apache-maven/conf/settings-aliyun.xml"
+mvn clean package --settings $SETTINGS
+cd chinaport-data-signature-webapp
 
 # --- 配置信息 ---
 TAG="1.2.0"
@@ -15,10 +28,10 @@ readonly BLUE='\033[0;34m'
 readonly NC='\033[0m'
 
 # --- 日志函数 ---
-log_info()    { echo -e "${BLUE}ℹ️  $1${NC}"; }
-log_warn()    { echo -e "${YELLOW}⚠️  $1${NC}"; }
+log_info() { echo -e "${BLUE}ℹ️  $1${NC}"; }
+log_warn() { echo -e "${YELLOW}⚠️  $1${NC}"; }
 log_success() { echo -e "${GREEN}✅ $1${NC}"; }
-log_error()   { echo -e "${RED}❌ $1${NC}"; }
+log_error() { echo -e "${RED}❌ $1${NC}"; }
 
 # --- 错误处理 ---
 set -e
