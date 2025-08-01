@@ -46,6 +46,7 @@ public class EmailNotifyStrategy implements NotifyStrategy<EmailNotifyRecord> {
     private EmailProperties emailProperties;
     @Autowired
     private UkeyHealthHelper ukeyHealthHelper;
+
     /**
      * 应用名称，用于邮件通知主题
      */
@@ -54,6 +55,10 @@ public class EmailNotifyStrategy implements NotifyStrategy<EmailNotifyRecord> {
 
     @Override
     public NotifyResult notify(EmailNotifyRecord event) {
+        if (emailProperties.getEnable().equals(false)) {
+            log.warn("U-Key 加签失败通知邮件已禁用，跳过发送, 如需启用请设置 spring.mail.enable=true");
+            return NotifyResult.SKIP;
+        }
         if (event == null) {
             log.warn("U-Key 加签失败，通知事件为空");
             return NotifyResult.FAILURE;

@@ -14,4 +14,5 @@ import lombok.Getter;
 public enum NotifyResult {
     SUCCESS,
     FAILURE,
+    SKIP;
 }

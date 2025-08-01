@@ -27,9 +27,13 @@ public class FeisuNotifyStrategy implements NotifyStrategy<Object> {
 
     @Override
     public NotifyResult notify(Object event) {
-        if (null == properties || !properties.isEnabled()) {
-            log.warn("飞书通知未启用或属性未设置.");
-            return NotifyResult.FAILURE;
+        if (null == properties) {
+            log.warn("飞书通知属性未设置.");
+            return NotifyResult.SKIP;
+        }
+        if (!properties.isEnabled()) {
+            log.info("飞书通知已禁用，跳过发送，如需启用请设置 eport.signature.notify.feisu.enabled=true");
+            return NotifyResult.SKIP;
         }
         // TODO: Implement the logic to send a notification to Feisu
         return null;
