@@ -126,4 +126,4 @@ echo -e "${YELLOW}💡 查看镜像详情: docker buildx imagetools inspect ${IM
 
 log_success "脚本执行完成！"
 
-cd .. & mvn clean
+cd .. && mvn clean
