@@ -210,12 +210,8 @@ public class EmailNotifyStrategy implements NotifyStrategy<EmailNotifyRecord> {
      * @since 1.0.9
      */
     public void restartUkeyWindowsWebsocketClient(MimeMessageDomain message) {
-
-        ConsoleOutput output = ukeyHealthHelper.fixUkey(Command.STOP);
-        ConsoleOutput startOutput = ukeyHealthHelper.fixUkey(Command.START);
-        output.getErrorOutList().addAll(startOutput.getErrorOutList());
-        output.getStdOutList().addAll(startOutput.getStdOutList());
-
+        log.info("准备重启 U-Key Windows WebSocket 客户端...");
+        ConsoleOutput output = ukeyHealthHelper.fixUkey(Command.RESTART);
         String restartInfoHtml = """
                 
                 <div style="margin-top:18px; padding:12px; background:#fff3cd; border:1px solid #ffeeba; border-radius:4px; color:#856404;">
@@ -230,7 +226,6 @@ public class EmailNotifyStrategy implements NotifyStrategy<EmailNotifyRecord> {
                 </div>
                 
                 """.formatted(applicationName, StringUtils.defaultIfBlank(toJson(output), "（无终端输出）"));
-
         message.setText(message.getText() + restartInfoHtml);
     }
 
