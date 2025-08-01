@@ -53,7 +53,7 @@ eport:
     notify:
       feisu:
         enabled: off
-        webhook-url: https://open.feishu.cn/open-apis/bot/v2/hook/xxx
+        webhook-url: https://open.feishu.cn/open-apis/bot/v2/hook/bde878e6-3808-4da8-aa33-e72cbdf8c0b8
         at-user-id: ''
     # 报文传输企业的元数据配置（数据上报）
     report:
