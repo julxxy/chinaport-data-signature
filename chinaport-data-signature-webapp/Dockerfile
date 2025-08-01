@@ -11,4 +11,4 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ >/etc/timezone
 ENV JAVA_OPTS=""
 ENV SPRING_ARGS=""
 
-ENTRYPOINT exec java $JAVA_OPTS -jar chinaport-data-signature.jar $SPRING_ARGS
+ENTRYPOINT ["sh", "-c", "exec java $JAVA_OPTS -jar chinaport-data-signature.jar $SPRING_ARGS"]
