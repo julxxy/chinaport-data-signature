@@ -2,11 +2,13 @@ package cn.alphahub.eport.signature.controller.rpc;
 
 import cn.alphahub.eport.signature.base.domain.Result;
 import cn.alphahub.eport.signature.config.ChinaEportProperties;
+import cn.alphahub.eport.signature.config.WebClientConfiguration;
 import cn.alphahub.eport.signature.core.web.EportReportResultHttpClient;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
+import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
+import reactor.util.context.Context;
+
+import static cn.alphahub.eport.signature.base.constant.FrameworkConstant.TRACE_ID;
 
 /**
  * 查询申报回执结果
@@ -48,9 +53,12 @@ public class EportReportResultController {
      */
     @GetMapping("/ceb312msg")
     public Result<String> getCeb312msgResult(@RequestParam(required = false) @DateTimeFormat(pattern = "yyyyMMddHHmmss") LocalDateTime qryId) {
-        qryId = ObjectUtils.defaultIfNull(qryId, LocalDateTime.now().minusSeconds(15));
+        qryId = ObjectUtils.getIfNull(qryId, LocalDateTime.now().minusSeconds(15));
         log.info("开始查询311申报回执结果, qryId {}", FORMATTER.format(qryId));
-        Mono<String> msgResult = eportReportResultHttpClient.getCeb312msgResult(chinaEportProperties.getDxpId(), FORMATTER.format(qryId));
+        String traceId = MDC.get(TRACE_ID);
+        WebClientConfiguration.HTTP_HEADERS.set(h -> h.add(TRACE_ID, traceId));
+        Mono<String> msgResult = eportReportResultHttpClient.getCeb312msgResult(chinaEportProperties.getDxpId(), FORMATTER.format(qryId))
+                .contextWrite(Context.of(TRACE_ID, traceId));
         return Result.ok(msgResult.block());
     }
 
@@ -70,9 +78,12 @@ public class EportReportResultController {
      */
     @GetMapping("/ceb622msg")
     public Result<String> getCe622msgResult(@RequestParam(required = false) @DateTimeFormat(pattern = "yyyyMMddHHmmss") LocalDateTime qryId) {
-        qryId = ObjectUtils.defaultIfNull(qryId, LocalDateTime.now().minusSeconds(15));
+        qryId = ObjectUtils.getIfNull(qryId, LocalDateTime.now().minusSeconds(15));
         log.info("开始查询621进口单申报回执结果, qryId {}", FORMATTER.format(qryId));
-        Mono<String> msgResult = eportReportResultHttpClient.getCe622msgResult(chinaEportProperties.getDxpId(), FORMATTER.format(qryId));
+        String traceId = MDC.get(TRACE_ID);
+        WebClientConfiguration.HTTP_HEADERS.set(h -> h.add(TRACE_ID, traceId));
+        Mono<String> msgResult = eportReportResultHttpClient.getCe622msgResult(chinaEportProperties.getDxpId(), FORMATTER.format(qryId))
+                .contextWrite(Context.of(TRACE_ID, traceId));
         return Result.ok(msgResult.block());
     }
 

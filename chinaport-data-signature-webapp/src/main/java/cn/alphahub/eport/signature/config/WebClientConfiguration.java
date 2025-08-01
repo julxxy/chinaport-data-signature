@@ -10,8 +10,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.Objects;
 import java.util.function.Consumer;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.tomcat.util.codec.binary.Base64;
+import org.slf4j.MDC;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,6 +28,7 @@ import org.springframework.web.reactive.function.client.support.WebClientAdapter
 import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 import reactor.core.publisher.Mono;
 
+import static cn.alphahub.eport.signature.base.constant.FrameworkConstant.TRACE_ID;
 import static cn.alphahub.eport.signature.core.ChinaEportReportClient.EPORT_CEBMESSAGE_SERVER_ENCODE;
 import static cn.alphahub.eport.signature.core.ChinaEportReportClient.REPORT_PROD_ENV_179_URL_ENCODE;
 
@@ -57,9 +59,8 @@ public class WebClientConfiguration {
                 .defaultStatusHandler(HttpStatusCode::isError, resp -> Mono.just(new EportWebClientException("Web Client 调用发生异常!")))
                 .baseUrl(StringUtils.defaultIfBlank(chinaEportProperties.getServer(), new String(Base64.decodeBase64(EPORT_CEBMESSAGE_SERVER_ENCODE))))
                 .build();
-        HttpServiceProxyFactory httpServiceProxyFactory = HttpServiceProxyFactory.builder(WebClientAdapter.forClient(webClient))
-                .build();
-        return httpServiceProxyFactory.createClient(EportCebMessageHttpClient.class);
+        HttpServiceProxyFactory proxyFactory = HttpServiceProxyFactory.builderFor(WebClientAdapter.create(webClient)).build();
+        return proxyFactory.createClient(EportCebMessageHttpClient.class);
     }
 
 
@@ -80,8 +81,8 @@ public class WebClientConfiguration {
                 .defaultStatusHandler(HttpStatusCode::isError, resp -> Mono.just(new EportWebClientException("Web Client 调用发生异常!")))
                 .baseUrl(StringUtils.defaultIfBlank(customs179Properties.getServer(), new String(Base64.decodeBase64(REPORT_PROD_ENV_179_URL_ENCODE))))
                 .build();
-        HttpServiceProxyFactory httpServiceProxyFactory = HttpServiceProxyFactory.builder(WebClientAdapter.forClient(webClient)).build();
-        return httpServiceProxyFactory.createClient(EportCustoms179HttpClient.class);
+        HttpServiceProxyFactory proxyFactory = HttpServiceProxyFactory.builderFor(WebClientAdapter.create(webClient)).build();
+        return proxyFactory.createClient(EportCustoms179HttpClient.class);
     }
 
     /**
@@ -96,8 +97,8 @@ public class WebClientConfiguration {
                 .defaultStatusHandler(HttpStatusCode::isError, resp -> Mono.just(new EportWebClientException("Web Client 调用发生异常!")))
                 .baseUrl(baseUrl)
                 .build();
-        return HttpServiceProxyFactory.builder(WebClientAdapter.forClient(webClient)).build()
-                .createClient(EportReportResultHttpClient.class);
+        return HttpServiceProxyFactory.builderFor(WebClientAdapter.create(webClient))
+                .build().createClient(EportReportResultHttpClient.class);
     }
 
     /**
@@ -115,9 +116,8 @@ public class WebClientConfiguration {
                 .defaultStatusHandler(HttpStatusCode::isError, resp -> Mono.just(new EportWebClientException("Web Client 调用发生异常!")))
                 .baseUrl("http://127.0.0.1:8080")
                 .build();
-        WebClientAdapter clientAdapter = WebClientAdapter.forClient(webClient);
-        HttpServiceProxyFactory httpServiceProxyFactory = HttpServiceProxyFactory.builder(clientAdapter).build();
-        return httpServiceProxyFactory.createClient(WebfluxDemoHttpClient.class);
+        HttpServiceProxyFactory proxyFactory = HttpServiceProxyFactory.builderFor(WebClientAdapter.create(webClient)).build();
+        return proxyFactory.createClient(WebfluxDemoHttpClient.class);
     }
 
     /**
@@ -167,30 +167,42 @@ public class WebClientConfiguration {
      * log web request
      */
     private ExchangeFilterFunction logRequest() {
-        return ExchangeFilterFunction.ofRequestProcessor(clientRequest -> {
-            if (log.isInfoEnabled()) {
-                log.info("Request URL: {}", clientRequest.url());
-                log.info("Request Method: {}", clientRequest.method());
-                log.info("Request Headers: {}", clientRequest.headers());
-                if (clientRequest.method() == HttpMethod.POST || clientRequest.method() == HttpMethod.PUT) {
-                    log.info("Request Body: {}", clientRequest.body());
-                }
-            }
-            return Mono.just(clientRequest);
-        });
+        return ExchangeFilterFunction.ofRequestProcessor(clientRequest ->
+                Mono.deferContextual(ctx -> {
+                    String traceId = ctx.getOrDefault(TRACE_ID, "");
+                    if (StringUtils.isNotEmpty(traceId)) {
+                        MDC.put(TRACE_ID, traceId);
+                    }
+                    if (log.isInfoEnabled()) {
+                        log.info("Request URL: {}", clientRequest.url());
+                        log.info("Request Method: {}", clientRequest.method());
+                        log.info("Request Headers: {}", clientRequest.headers());
+                        if (clientRequest.method() == HttpMethod.POST || clientRequest.method() == HttpMethod.PUT) {
+                            log.info("Request Body: {}", clientRequest.body());
+                        }
+                    }
+                    return Mono.just(clientRequest);
+                })
+        );
     }
 
     /**
      * log web response
      */
     private ExchangeFilterFunction logResponse() {
-        return ExchangeFilterFunction.ofResponseProcessor(clientResponse -> {
-            if (log.isInfoEnabled()) {
-                log.info("Response status: {}", clientResponse.statusCode());
-                log.info("Response headers: {}", clientResponse.headers().asHttpHeaders());
-            }
-            return Mono.just(clientResponse);
-        });
+        return ExchangeFilterFunction.ofResponseProcessor(clientResponse ->
+                Mono.deferContextual(ctx -> {
+                    String traceId = ctx.getOrDefault(TRACE_ID, "");
+                    if (StringUtils.isNotEmpty(traceId)) {
+                        MDC.put(TRACE_ID, traceId);
+                    }
+                    if (log.isInfoEnabled()) {
+                        log.info("Response status: {}", clientResponse.statusCode());
+                        log.info("Response headers: {}", clientResponse.headers().asHttpHeaders());
+                    }
+                    return Mono.just(clientResponse);
+                })
+        );
     }
 
 }

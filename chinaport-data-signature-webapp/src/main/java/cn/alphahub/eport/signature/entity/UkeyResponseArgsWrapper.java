@@ -17,4 +17,5 @@ import lombok.NoArgsConstructor;
 public class UkeyResponseArgsWrapper {
     private Thread thread;
     private Args responseArgs;
+    private String sessionId;
 }

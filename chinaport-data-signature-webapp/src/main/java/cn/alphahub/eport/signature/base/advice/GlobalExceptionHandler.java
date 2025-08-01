@@ -22,7 +22,7 @@ import org.yaml.snakeyaml.constructor.DuplicateKeyException;
 /**
  * 全局异常处理（集中处理全局异常处理）
  *
- * @author liuwenjing
+ * @author Julian
  */
 @Slf4j
 @RestControllerAdvice(basePackages = {"cn.alphahub"})

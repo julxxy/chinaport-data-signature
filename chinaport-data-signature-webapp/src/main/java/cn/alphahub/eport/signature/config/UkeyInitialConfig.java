@@ -84,7 +84,7 @@ public class UkeyInitialConfig implements ApplicationRunner {
     public static String getDigestValueParameter(String sourceXml, Integer uniqueId) {
         Map<String, Object> args = new LinkedHashMap<>(2);
         args.put("szInfo", sourceXml);
-        args.put("passwd", ObjectUtils.defaultIfNull(SpringUtil.getBean(UkeyProperties.class).getPassword(), DEFAULT_PASSWORD));
+        args.put("passwd", ObjectUtils.getIfNull(SpringUtil.getBean(UkeyProperties.class).getPassword(), DEFAULT_PASSWORD));
         UkeyRequest ukeyRequest = new UkeyRequest();
         ukeyRequest.set_method("sec_SpcSHA1DigestAsPEM");
         ukeyRequest.set_id(uniqueId);
@@ -103,7 +103,7 @@ public class UkeyInitialConfig implements ApplicationRunner {
         log.warn("发送给ukey的真正请求入参: {}\n原始报文: {}", initData, request.getData());
         @SuppressWarnings({"all"}) UkeyRequest ukeyRequest = new UkeyRequest("cus-sec_SpcSignDataAsPEM", new HashMap<>() {{
             put("inData", initData);
-            put("passwd", ObjectUtils.defaultIfNull(SpringUtil.getBean(UkeyProperties.class).getPassword(), DEFAULT_PASSWORD));
+            put("passwd", ObjectUtils.getIfNull(SpringUtil.getBean(UkeyProperties.class).getPassword(), DEFAULT_PASSWORD));
         }});
         ukeyRequest.set_id(request.getId());
         return JacksonUtil.toJson(ukeyRequest);
@@ -119,7 +119,7 @@ public class UkeyInitialConfig implements ApplicationRunner {
         String initData = SignHandler.getInitData(request);
         log.warn("使用卡计算摘要，返回PEM格式信息: \n{}原始报文:\n{}", initData, request.getData());
         args.put("szInfo", initData);
-        args.put("passwd", ObjectUtils.defaultIfNull(SpringUtil.getBean(UkeyProperties.class).getPassword(), DEFAULT_PASSWORD));
+        args.put("passwd", ObjectUtils.getIfNull(SpringUtil.getBean(UkeyProperties.class).getPassword(), DEFAULT_PASSWORD));
         UkeyRequest ukeyRequest = new UkeyRequest();
         ukeyRequest.set_method("cus-sec_SpcSHA1DigestAsPEM");
         ukeyRequest.set_id(request.getId());

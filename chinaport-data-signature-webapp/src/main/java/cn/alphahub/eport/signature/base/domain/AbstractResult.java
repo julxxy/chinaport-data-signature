@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
  * 顶层抽象类, 可以使用我已经写好的BaseResult<T>, 也可以选择自己实现AbstractResult<T>, {@code permits}关键字加上类名即可
  * </p>
  *
- * @author liuwenjing
+ * @author Julian
  * @version 1.2.0
  * @date 2022年2月11日
  */
@@ -25,14 +25,14 @@ public abstract class AbstractResult<T> implements Serializable {
     private String message;
 
     /**
+     * 跟踪ID
+     */
+    private String traceId;
+
+    /**
      * 是否成功
      */
     private Boolean success = false;
-
-    /**
-     * 响应时间戳
-     */
-    private String timestamp;
 
     /**
      * 状态码

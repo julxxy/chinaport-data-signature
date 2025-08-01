@@ -12,9 +12,9 @@ Plug-and-play, no middleware required. Suitable for enterprise-grade e-commerce 
 ## Foreword | 前言
 
 > After nearly two years of open-source code maintenance and exploration, we have developed an all-in-one solution offering free, open and universal access for a wide range of businesses. The aim is to digitally sign and forward XML messages to the General Administration of Customs via China E-Port (HaiKou Customs), facilitating efficient cross-border e-commerce and import-export business.
->
+> 
 > 经过近两年的开源代码维护和探索，我们终于开发出一站式免费解决方案，为更多企业提供快速接入和使用能力。项目旨在实现中国电子口岸（海口海关）总署XML 报文加签推送，助力跨境电商与进出口业务发展。
->
+> 
 > _2023-07_
 
 本项目遵循 `GNU 3.0` 协议，测试用例中企业信息已获授权，企业调试时应将报文数据中涉及到的`报文传输编码（DXPID）`、`copCode`、`copName`、`电商平台代码ebpCode`等主体信息替换成企业在中国电子口岸后台注册的有效信息。
