@@ -1,10 +1,7 @@
 # **China E-Port Data Signature**
 
-中国电子口岸（海口海关）报文加签推送应用  
-_A free, open-source end-to-end signature solution for Chinese E-Port CEBXxxMessage and Customs 179 messages.
-Plug-and-play, no middleware required. Suitable for enterprise-grade e-commerce and trade._
-
----
+中国电子口岸（海口海关）报文加签推送应用.
+_A free, open-source end-to-end signature solution for Chinese E-Port CEBXxxMessage and Customs 179 messages. Plug-and-play, no middleware required. Suitable for enterprise-grade e-commerce and trade._
 
 [![GitHub Release](https://img.shields.io/github/v/release/julxxy/chinaport-data-signature?style=flat-square&logo=github&label=Release)](https://github.com/julxxy/chinaport-data-signature/releases)
 [![GitHub Stars](https://img.shields.io/github/stars/julxxy/chinaport-data-signature?style=flat-square&logo=github&label=Stars)](https://github.com/julxxy/chinaport-data-signature/stargazers)
@@ -78,7 +75,7 @@ Plug-and-play, no middleware required. Suitable for enterprise-grade e-commerce 
 
 ## 功能概述
 
-![中国电子口岸（海口海关）报文加签推送应用](https://weasley.oss-cn-shanghai.aliyuncs.com/Photos/%E4%B8%AD%E5%9B%BD%E7%94%B5%E5%AD%90%E5%8F%A3%E5%B2%B8%EF%BC%88%E6%B5%B7%E5%8F%A3%E6%B5%B7%E5%85%B3%EF%BC%89%E6%8A%A5%E6%96%87%E5%8A%A0%E7%AD%BE%E6%8E%A8%E9%80%81%E5%BA%94%E7%94%A8_20250730211142.jpg)
+![Arc 2025-08-02 22.38.07](https://cdn.jsdelivr.net/gh/julxxy/image-hosting@main/img/Arc%202025-08-02%2022.38.07.png)
 
 ---
 
@@ -250,6 +247,7 @@ _参见[start.sh](https://github.com/julxxy/chinaport-data-signature/blob/main/s
 - 海南嗨亿购科技有限公司
 - 小红书
 - 广东铭鸿数据有限公司
+- 海口中伟机免投资有限公司
 - ...
 
 ---
