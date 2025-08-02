@@ -1,5 +1,5 @@
-FROM azul/zulu-openjdk:17-jre
-LABEL maintainer="weasley"
+FROM eclipse-temurin:21-jre-jammy
+LABEL maintainer="Julian"
 
 WORKDIR /app
 COPY target/chinaport-data-signature-webapp.jar /app/chinaport-data-signature.jar

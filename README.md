@@ -1,11 +1,30 @@
 # **China E-Port Data Signature**
 
-中国电子口岸（海口海关）报文加签推送应用
+中国电子口岸（海口海关）报文加签推送应用  
 _A free, open-source end-to-end signature solution for Chinese E-Port CEBXxxMessage and Customs 179 messages.
 Plug-and-play, no middleware required. Suitable for enterprise-grade e-commerce and trade._
 
-| ![Docker Pulls](https://img.shields.io/docker/pulls/weasleyj/chinaport-data-signature) | ![Docker Image Size (tag)](https://img.shields.io/docker/image-size/weasleyj/chinaport-data-signature/latest) | ![Docker Image Version (latest semver)](https://img.shields.io/docker/v/weasleyj/chinaport-data-signature) | [![Maven Central](https://img.shields.io/maven-central/v/io.github.weasley-j/chinaport-data-signature-data-model)](https://search.maven.org/artifact/io.github.weasley-j/chinaport-data-signature-data-model) |
-|:--------------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+---
+
+[![GitHub Release](https://img.shields.io/github/v/release/julxxy/chinaport-data-signature?style=flat-square&logo=github&label=Release)](https://github.com/julxxy/chinaport-data-signature/releases)
+[![GitHub Stars](https://img.shields.io/github/stars/julxxy/chinaport-data-signature?style=flat-square&logo=github&label=Stars)](https://github.com/julxxy/chinaport-data-signature/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/julxxy/chinaport-data-signature?style=flat-square&logo=github&label=Forks)](https://github.com/julxxy/chinaport-data-signature/network/members)
+[![GitHub Issues](https://img.shields.io/github/issues/julxxy/chinaport-data-signature?style=flat-square&logo=github&label=Issues)](https://github.com/julxxy/chinaport-data-signature/issues)
+[![License](https://img.shields.io/github/license/julxxy/chinaport-data-signature?style=flat-square&logo=gnu&label=License)](https://github.com/julxxy/chinaport-data-signature/blob/main/LICENSE)
+
+[![Docker Pulls](https://img.shields.io/docker/pulls/weasleyj/chinaport-data-signature?style=flat-square&logo=docker&label=Docker%20Pulls&color=2496ED)](https://hub.docker.com/r/weasleyj/chinaport-data-signature)
+[![Docker Image Size](https://img.shields.io/docker/image-size/weasleyj/chinaport-data-signature/latest?style=flat-square&logo=docker&label=Image%20Size&color=2496ED)](https://hub.docker.com/r/weasleyj/chinaport-data-signature)
+[![Docker Image Version](https://img.shields.io/docker/v/weasleyj/chinaport-data-signature?style=flat-square&logo=docker&label=Docker%20Version&color=2496ED&sort=semver)](https://hub.docker.com/r/weasleyj/chinaport-data-signature/tags)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.weasley-j/chinaport-data-signature-data-model?style=flat-square&logo=apache-maven&label=Maven%20Central&color=C71A36)](https://search.maven.org/artifact/io.github.weasley-j/chinaport-data-signature-data-model)
+
+[![Java](https://img.shields.io/badge/Java-17+-ED8B00?style=flat-square&logo=openjdk&logoColor=white)](https://openjdk.org/)
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-6DB33F?style=flat-square&logo=spring-boot&logoColor=white)](https://spring.io/projects/spring-boot)
+[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?style=flat-square&logo=docker&logoColor=white)](https://www.docker.com/)
+[![WebSocket](https://img.shields.io/badge/WebSocket-Support-010101?style=flat-square&logo=socket.io&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API)
+
+[![Download Latest](https://img.shields.io/badge/Download-Latest%20Release-brightgreen?style=for-the-badge&logo=download)](https://github.com/julxxy/chinaport-data-signature/releases/latest)
+[![Docker Run](https://img.shields.io/badge/Docker-Quick%20Start-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://hub.docker.com/r/weasleyj/chinaport-data-signature)
+[![View Documentation](https://img.shields.io/badge/Documentation-View%20Docs-blue?style=for-the-badge&logo=gitbook)](https://github.com/julxxy/chinaport-data-signature/wiki/%E5%BC%80%E5%8F%91%E8%80%85%E4%B8%AD%E5%BF%83)
 
 ---
 
@@ -44,7 +63,14 @@ Plug-and-play, no middleware required. Suitable for enterprise-grade e-commerce 
 - 单体应用：直接下载 [Releases](https://github.com/julxxy/chinaport-data-signature/releases)
 - 微服务：切换 [feature_microservice](https://github.com/julxxy/chinaport-data-signature/tree/feature_microservice) 分支
 - Docker 镜像：[Docker Hub](https://hub.docker.com/repository/docker/weasleyj/chinaport-data-signature)
-- Java项目集成：使用 [Maven 数据模型](https://central.sonatype.com/artifact/io.github.weasley-j/chinaport-data-signature-data-model)
+- Java项目集成：使用 [Maven 数据模型](https://central.sonatype.com/artifact/io.github.weasley-j/chinaport-data-signature-data-model), Maven Integration
+```xml
+<dependency>
+    <groupId>io.github.weasley-j</groupId>
+    <artifactId>chinaport-data-signature-data-model</artifactId>
+    <version>Latest Version</version>
+</dependency>
+```
 
 > 建议 Windows 平台用 [Git Bash](https://gitforwindows.org/) 启动（终端日志不乱码）
 
@@ -204,7 +230,7 @@ _参见[start.sh](https://github.com/julxxy/chinaport-data-signature/blob/main/s
 - 市面绝大多数电子口岸加签解决方案为商业付费且封闭，企业投入成本高，透明度低。
 - 我们坚信报文加签属于数字贸易的基础设施，应惠及更多企业与开发者。
 - 开源不仅有助于提升行业信任度，也能集结社区力量持续改进和快速适配各地业务需求。
-- 欢迎各类企业和个人贡献代码、文档、案例或提出宝贵建议，与我们一起推进中国电子口岸开源生态发展！
+- 欢迎各类企业和个人贡献代码、文档、案例或提出宝贵建议！
 
 ### 如何赞助
 

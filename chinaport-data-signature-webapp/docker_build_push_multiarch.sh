@@ -1,5 +1,6 @@
 #!/usr/bin/env zsh
 
+# 检查并安装 sptn 命令
 source ~/.zshrc
 if command -v sptn >/dev/null 2>&1; then
   echo "检测到 sptn 命令，正在执行..."
@@ -8,13 +9,14 @@ else
   echo "未检测到 sptn 命令，跳过执行"
 fi
 
+# --- 进入项目目录 ---
 cd ..
 SETTINGS="/Users/weasley/Development/program/apache-maven/conf/settings-aliyun.xml"
 mvn clean package --settings $SETTINGS
 cd chinaport-data-signature-webapp
 
 # --- 配置信息 ---
-TAG="1.2.0"
+TAG="1.2.1"
 IMAGE="weasleyj/chinaport-data-signature"
 CONTAINER_NAME="chinaport-data-signature"
 BUILDER_NAME="multiarch-builder"
