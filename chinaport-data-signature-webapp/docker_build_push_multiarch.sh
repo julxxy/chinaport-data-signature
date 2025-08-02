@@ -16,7 +16,7 @@ mvn clean package --settings $SETTINGS
 cd chinaport-data-signature-webapp
 
 # --- 配置信息 ---
-TAG="1.2.1"
+TAG="1.2.0.1"
 IMAGE="weasleyj/chinaport-data-signature"
 CONTAINER_NAME="chinaport-data-signature"
 BUILDER_NAME="multiarch-builder"
