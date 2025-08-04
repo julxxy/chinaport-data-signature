@@ -55,4 +55,15 @@ public interface EportReportResultHttpClient {
      */
     @GetExchange(value = "/ceb622msg", accept = {MediaType.TEXT_PLAIN_VALUE})
     Mono<String> getCe622msgResult(@RequestParam String dxpid, @RequestParam String qryid);
+
+    /**
+     * 报错信息
+     *
+     * @param dxpid 向中国电子口岸数据中心申请数据交换平台的用户编号
+     * @param qryid 查询时间，日期时间格式：yyyyMMddHHmmss
+     * @return 报错信息
+     * @apiNote 查询下 311，621 等申报回执时，如果出现报错信息，可以通过此接口查询报错信息
+     */
+    @GetExchange(value = "/ceb900msg", accept = {MediaType.TEXT_PLAIN_VALUE})
+    Mono<String> getCeb900msgResult(@RequestParam String dxpid, @RequestParam String qryid);
 }

@@ -87,4 +87,20 @@ public class EportReportResultController {
         return Result.ok(msgResult.block());
     }
 
+    /**
+     * 查询报错信息
+     *
+     * @param qryId 查询时间，日期时间格式：yyyyMMddHHmmss
+     * @return 报错信息
+     */
+    @GetMapping("/ceb900msg")
+    public Result<String> getCeb900msgResult(@RequestParam(required = false) @DateTimeFormat(pattern = "yyyyMMddHHmmss") LocalDateTime qryId) {
+        qryId = ObjectUtils.getIfNull(qryId, LocalDateTime.now().minusSeconds(15));
+        log.info("开始查询报错信息, qryId {}", FORMATTER.format(qryId));
+        String traceId = MDC.get(TRACE_ID);
+        WebClientConfiguration.HTTP_HEADERS.set(h -> h.add(TRACE_ID, traceId));
+        Mono<String> msgResult = eportReportResultHttpClient.getCeb900msgResult(chinaEportProperties.getDxpId(), FORMATTER.format(qryId))
+                .contextWrite(Context.of(TRACE_ID, traceId));
+        return Result.ok(msgResult.block());
+    }
 }

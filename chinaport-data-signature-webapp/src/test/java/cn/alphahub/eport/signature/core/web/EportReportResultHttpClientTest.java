@@ -1,6 +1,8 @@
 package cn.alphahub.eport.signature.core.web;
 
 import cn.alphahub.eport.signature.config.ChinaEportProperties;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -32,6 +34,16 @@ class EportReportResultHttpClientTest {
         eportReportResultHttpClient.getCe622msgResult(chinaEportProperties.getDxpId(), "20230806121200").subscribe(data -> {
             log.info("621回执结果：{}", data);
             Assertions.assertNotNull(data, "621回执结果不为空");
+        });
+    }
+
+    @Test
+    @DisplayName("查询 900 报错信息")
+    void getCeb900msg() {
+        String currDate = DateTimeFormatter.ofPattern("yyyyMMddHHmmss").format(LocalDateTime.now());
+        eportReportResultHttpClient.getCeb900msgResult(chinaEportProperties.getDxpId(), currDate).subscribe(data -> {
+            log.debug("查询 900 报错信息：{}", data);
+            Assertions.assertNotNull(data, "311回执结果不为空");
         });
     }
 }
