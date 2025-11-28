@@ -11,7 +11,7 @@ fi
 
 # --- 进入项目目录 ---
 cd ..
-SETTINGS="/Users/weasley/Development/program/apache-maven/conf/settings-aliyun.xml"
+SETTINGS="/Users/${USER}/Development/program/apache-maven/conf/settings-aliyun.xml"
 mvn clean package --settings $SETTINGS
 cd chinaport-data-signature-webapp
 

@@ -26,7 +26,7 @@ class CommandClientTest {
     @Test
     void execute2() {
         CommandClient.getSharedInstance().execute("""
-                java -jar /Users/weasley/Development/IdeaProjects/chinaport-data-signature/target/chinaport-data-signature.jar
+                java -jar /Users/julian/Development/IdeaProjects/chinaport-data-signature/target/chinaport-data-signature.jar
                 """);
     }
 
