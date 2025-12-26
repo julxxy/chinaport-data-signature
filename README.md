@@ -229,13 +229,6 @@ _参见[start.sh](https://github.com/julxxy/chinaport-data-signature/blob/main/s
 - 开源不仅有助于提升行业信任度，也能集结社区力量持续改进和快速适配各地业务需求。
 - 欢迎各类企业和个人贡献代码、文档、案例或提出宝贵建议！
 
-### 如何赞助
-
-- [PayPal](https://www.paypal.me/shiwenjinga)
-
-| ![AliPay](https://weasley.oss-cn-shanghai.aliyuncs.com/Photos/image-20230713012837745.png) | ![WeChatPay](https://weasley.oss-cn-shanghai.aliyuncs.com/Photos/image-20230713013148459.png) |
-|:------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------------------:|
-
 ---
 
 ## 感谢/接入企业名录
