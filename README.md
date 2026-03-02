@@ -23,8 +23,6 @@ _A free, open-source end-to-end signature solution for Chinese E-Port CEBXxxMess
 [![Docker Run](https://img.shields.io/badge/Docker-Quick%20Start-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://hub.docker.com/r/weasleyj/chinaport-data-signature)
 [![View Documentation](https://img.shields.io/badge/Documentation-View%20Docs-blue?style=for-the-badge&logo=gitbook)](https://github.com/julxxy/chinaport-data-signature/wiki/%E5%BC%80%E5%8F%91%E8%80%85%E4%B8%AD%E5%BF%83)
 
-[![Star History Chart](https://api.star-history.com/svg?repos=julxxy/chinaport-data-signature&type=Date)](https://star-history.com/#julxxy/chinaport-data-signature&Date)
-
 ---
 
 ## Foreword | 前言
