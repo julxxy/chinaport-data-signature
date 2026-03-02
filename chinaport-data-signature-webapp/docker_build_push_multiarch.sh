@@ -2,12 +2,16 @@
 
 # 检查并安装 sptn 命令
 source ~/.zshrc
-if command -v sptn >/dev/null 2>&1; then
-  echo "检测到 sptn 命令，正在执行..."
-  sptn
+if command -v setproxy >/dev/null 2>&1; then
+  echo "检测到 setproxy 命令，正在执行..."
+  setproxy
 else
-  echo "未检测到 sptn 命令，跳过执行"
+  echo "未检测到 setproxy 命令，跳过执行"
 fi
+
+export JAVA_HOME=$(/usr/libexec/java_home -v 17)
+export PATH="$JAVA_HOME/bin:$PATH"
+echo "当前 JDK 版本: $(java -version 2>&1 | head -1)"
 
 # --- 进入项目目录 ---
 cd ..
@@ -16,7 +20,7 @@ mvn clean package --settings $SETTINGS
 cd chinaport-data-signature-webapp
 
 # --- 配置信息 ---
-TAG="1.2.0.1"
+TAG="1.2.1"
 IMAGE="weasleyj/chinaport-data-signature"
 CONTAINER_NAME="chinaport-data-signature"
 BUILDER_NAME="multiarch-builder"
