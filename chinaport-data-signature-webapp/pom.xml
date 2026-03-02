@@ -11,7 +11,7 @@
 
     <groupId>cn.alphahub.eport.signature</groupId>
     <artifactId>chinaport-data-signature-webapp</artifactId>
-    <version>1.2.0</version>
+    <version>1.2.1</version>
     <name>chinaport-data-signature-webapp</name>
     <url>https://github.com/julxxy/chinaport-data-signature.git</url>
 
