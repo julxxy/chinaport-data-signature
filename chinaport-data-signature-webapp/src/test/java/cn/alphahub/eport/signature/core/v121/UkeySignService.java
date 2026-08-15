@@ -30,7 +30,6 @@ import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.lang.NonNull;
-import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -43,7 +42,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
  */
 @Data
 @Slf4j
-@Service
+//@Service
 @Validated
 @Accessors(chain = true)
 public class UkeySignService {

@@ -23,7 +23,6 @@ import org.apache.commons.lang3.Strings;
 import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.socket.client.WebSocketConnectionManager;
 import org.springframework.web.socket.client.standard.StandardWebSocketClient;
@@ -34,7 +33,7 @@ import org.springframework.web.socket.client.standard.StandardWebSocketClient;
  */
 @Data
 @Slf4j
-@Service("mySignHandler") // 唯一Bean名，避免与原SignHandler冲突
+//@Service("mySignHandler") // 唯一Bean名，避免与原SignHandler冲突
 @Validated
 @Accessors(chain = true)
 public class MySignHandler {
