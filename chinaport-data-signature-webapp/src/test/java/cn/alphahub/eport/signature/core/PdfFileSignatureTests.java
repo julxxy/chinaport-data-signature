@@ -37,7 +37,10 @@ class PdfFileSignatureTests {
      * 随附单据类型编码，按实际业务调整
      */
     static final String EDOC_CODE = "00000001";
-
+    /**
+     * u-key默认密码8个8
+     */
+    private static final String DEFAULT_PASSWORD = "88888888";
     /**
      * 根据实际情况替换
      */
@@ -57,8 +60,8 @@ class PdfFileSignatureTests {
         String fileName = pdfFile.getFileName().toString();
         String datetiem = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
 
-        // 对应 JS: 缺少3个参数,兼容缺少 Edoc_Name / cookies / passwd
         Map<String, Object> signArgsMap = new LinkedHashMap<>();
+        signArgsMap.put("passwd", DEFAULT_PASSWORD);
         signArgsMap.put("filePath", destDir);
         signArgsMap.put("fileName", fileName);
         signArgsMap.put("datetiem", datetiem);
