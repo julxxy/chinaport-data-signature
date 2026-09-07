@@ -17,7 +17,7 @@ class CertificateHandlerParserTest {
 
     @Test
     void parseCertificateByCertPath() {
-        CertificateParser.parseCertificateByCertPath("/Users/weasley/Downloads/03000000000cde6f.cer");
-        CertificateParser.parseCertificateByCertPath("/Users/weasley/Downloads/01691fe9.cer");
+        CertificateParser.parseCertificateByCertPath("/Users/julian/Downloads/03000000000cde6f.cer");
+        CertificateParser.parseCertificateByCertPath("/Users/julian/Downloads/01691fe9.cer");
     }
 }

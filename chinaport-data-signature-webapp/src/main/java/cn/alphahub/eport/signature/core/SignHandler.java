@@ -179,6 +179,8 @@ public class SignHandler {
                     }
                 } catch (Exception e) {
                     log.error("唤醒线程异常 {}", e.getLocalizedMessage(), e);
+                } finally {
+                    LockSupport.unpark(ref.get().getThread());
                 }
             }
 

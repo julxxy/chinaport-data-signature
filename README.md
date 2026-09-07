@@ -241,6 +241,7 @@ _参见[start.sh](https://github.com/julxxy/chinaport-data-signature/blob/main/s
 - 小红书
 - 广东铭鸿数据有限公司
 - 海口中伟机免投资有限公司
+- 远方好物跨境供应链（深圳）有限公司 [官网](https://www.yuanfangkuajing.com/home)
 - ...
 
 ---

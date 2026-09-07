@@ -4,6 +4,7 @@ import cn.alphahub.eport.signature.config.ChinaEportProperties;
 import cn.alphahub.eport.signature.core.ChinaEportReportClient;
 import cn.alphahub.eport.signature.core.SignHandler;
 import cn.alphahub.eport.signature.core.web.EportCebMessageHttpClient;
+import cn.alphahub.eport.signature.core.web.EportReportResultHttpClient;
 import cn.alphahub.eport.signature.entity.SignRequest;
 import cn.alphahub.eport.signature.entity.SignResult;
 import cn.alphahub.eport.signature.entity.UkeyRequest;
@@ -34,6 +35,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @Slf4j
 @SpringBootTest
 class EportSignControllerTest {
+
     @Autowired
     SignHandler signHandler;
     @Autowired
@@ -44,6 +46,8 @@ class EportSignControllerTest {
     ChinaEportReportClient chinaEportReportClient;
     @Autowired
     EportCebMessageHttpClient cebMessageHttpClient;
+    @Autowired
+    EportReportResultHttpClient eportReportResultHttpClient;
 
     @Test
     @DisplayName("海关XML数据加签+验正签名结果")
@@ -151,6 +155,7 @@ class EportSignControllerTest {
         ceb311Message.getOrder().getOrderHead().setGuid(guid);
         chinaEportReportClient.buildBaseTransfer(ceb311Message.getBaseTransfer());
         MessageRequest messageRequest = chinaEportReportClient.buildMessageRequest(ceb311Message, MessageType.CEB311Message);
+
        /*
         String requestServer = StringUtils.defaultIfBlank(chinaEportProperties.getServer(), Base64.decodeStr(EPORT_CEBMESSAGE_SERVER_ENCODE));
         String requestBody = JSONUtil.toJsonStr(messageRequest);
@@ -161,22 +166,33 @@ class EportSignControllerTest {
                 .execute();
         log.info("开始上报，Http响应结果: {}", httpResponse.body());
         */
+
         cebMessageHttpClient.reportCebMessage(messageRequest).subscribe(data -> {
             log.info("开始申报数据，Http响应结果: {}", data);
         });
 
-        // 睡8秒，开始查询回执
+        // 睡8秒，开始查询回执、报错信息
         LocalDateTime uploadTime = LocalDateTime.now();
-        int sleepTime = 15;
-        for (int i = sleepTime; i > 0; i--) {
+        String currDate = DateTimeFormatter.ofPattern("yyyyMMddHHmmss").format(uploadTime);
+
+        for (int i = 15; i > 0; i--) {
             log.warn("开始查询推送回执，海关后台正在处理中，线程挂起剩余 {} 秒。", i);
             TimeUnit.SECONDS.sleep(1);
         }
-        String url = "http://" + Base64.decodeStr("MzYuMTAxLjIwOC4yMzA=") + ":8090/ceb312msg?" + HttpUtil.toParams(new LinkedHashMap<>() {{
+
+        String url = "http://" + Base64.decodeStr("MzYuMTAxLjIwOC4yMzA=") + ":8090/ceb900msg?" + HttpUtil.toParams(new LinkedHashMap<>() {{
             put("dxpid", chinaEportProperties.getDxpId());
-            put("qryid", DateTimeFormatter.ofPattern("yyyyMMddHHmmss").format(uploadTime));
+            put("qryid", currDate);
         }});
         HttpResponse receiptResponse = HttpUtil.createGet(url).execute();
-        log.info("\n{}\n回执结果: {}", url, receiptResponse.body()); //回执结果: [{org_id=1, instm=1690556389000, re_order_guid=AOF0YM-WEASLEY-20230728225932-6QVICD, returnstatus=-301014, ebpcode=4601630004, returntime2=20230728225949, ebccode=4601630004, trans_dxpid=DXPENT0000530815, returninfo=订单报文处理失败，接收报文为旧报文数据，不做处理;, returntime=1690556377000, orderno=T_C5051511332138160010}]
+        log.info("\n{}\n900回执结果: {}", url, receiptResponse.body()); //
+
+        url = "http://" + Base64.decodeStr("MzYuMTAxLjIwOC4yMzA=") + ":8090/ceb312msg?" + HttpUtil.toParams(new LinkedHashMap<>() {{
+            put("dxpid", chinaEportProperties.getDxpId());
+            put("qryid", currDate);
+        }});
+        receiptResponse = HttpUtil.createGet(url).execute();
+        log.info("\n{}\n311回执结果: {}", url, receiptResponse.body()); //回执结果: [{org_id=1, instm=1690556389000, re_order_guid=AOF0YM-WEASLEY-20230728225932-6QVICD, returnstatus=-301014, ebpcode=4601630004, returntime2=20230728225949, ebccode=4601630004, trans_dxpid=DXPENT0000530815, returninfo=订单报文处理失败，接收报文为旧报文数据，不做处理;, returntime=1690556377000, orderno=T_C5051511332138160010}]
+
     }
 }

@@ -34,7 +34,7 @@ public final class CertificateParser {
     /**
      * 根据 'xxx.cer' 证书获取 X509 证书
      *
-     * @param filePath 文件名， 如：/Users/weasley/Downloads/01691fe9.cer
+     * @param filePath 文件名， 如：/Users/julian/Downloads/01691fe9.cer
      * @return X.509 certificate
      */
     @SuppressWarnings("all")
