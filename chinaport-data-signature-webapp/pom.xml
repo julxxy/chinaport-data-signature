@@ -39,7 +39,7 @@
         <multiple-email.version>3.0.0</multiple-email.version>
         <jaxb-api.version>2.4.0-b180830.0359</jaxb-api.version>
         <jaxb-runtime.version>2.3.9</jaxb-runtime.version>
-        <guava.version>33.4.8-jre</guava.version>
+        <bucket4j.version>8.19.0</bucket4j.version>
         <sonar.host.url>http://192.168.31.140:9001</sonar.host.url>
         <sonar.login>admin</sonar.login>
         <sonar.password>123456</sonar.password>
@@ -167,16 +167,11 @@
             <artifactId>jna</artifactId>
         </dependency>
 
+        <!--单机令牌桶限流-->
         <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>${guava.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.google.errorprone</groupId>
-                    <artifactId>error_prone_annotations</artifactId>
-                </exclusion>
-            </exclusions>
+            <groupId>com.bucket4j</groupId>
+            <artifactId>bucket4j_jdk17-core</artifactId>
+            <version>${bucket4j.version}</version>
         </dependency>
 
         <dependency>
