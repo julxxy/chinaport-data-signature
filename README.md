@@ -33,7 +33,7 @@ _A free, open-source end-to-end signature solution for Chinese E-Port CEBXxxMess
 > 
 > _2023-07_
 
-本项目遵循 `GNU 3.0` 协议，测试用例中企业信息已获授权，企业调试时应将报文数据中涉及到的`报文传输编码（DXPID）`、`copCode`、`copName`、`电商平台代码ebpCode`等主体信息替换成企业在中国电子口岸后台注册的有效信息。
+本项目遵循 `GPL-3.0` 协议，测试用例中企业信息已获授权，企业调试时应将报文数据中涉及到的`报文传输编码（DXPID）`、`copCode`、`copName`、`电商平台代码ebpCode`等主体信息替换成企业在中国电子口岸后台注册的有效信息。
 
 ---
 
@@ -214,23 +214,6 @@ _参见[start.sh](https://github.com/julxxy/chinaport-data-signature/blob/main/s
 
 ---
 
-## 支持我们的项目
-
-### 为什么赞助
-
-- 帮助企业节约采购费用，使用行业通用开源加签
-- 推动技术开放与协作，促进行业共享
-- 支持项目持续改进和功能更新
-
-### 为什么开源
-
-- 市面绝大多数电子口岸加签解决方案为商业付费且封闭，企业投入成本高，透明度低。
-- 我们坚信报文加签属于数字贸易的基础设施，应惠及更多企业与开发者。
-- 开源不仅有助于提升行业信任度，也能集结社区力量持续改进和快速适配各地业务需求。
-- 欢迎各类企业和个人贡献代码、文档、案例或提出宝贵建议！
-
----
-
 ## 感谢/接入企业名录
 
 排名不分先后，自2023-07-11登记：
@@ -246,9 +229,21 @@ _参见[start.sh](https://github.com/julxxy/chinaport-data-signature/blob/main/s
 
 ---
 
-## License
+## 开源理念 & 技术支持
 
-[GNU 3.0](LICENSE)
+市面上绝大多数电子口岸加签方案为商业付费且封闭，企业投入高、透明度低。我们认为报文加签是数字贸易的基础设施，理应开放、可审计、惠及更多企业与开发者，因此本项目完全开源、全部功能免费使用，并长期维护。
+
+支持本项目最好的方式：
+
+- 接入后在 [Issues](https://github.com/julxxy/chinaport-data-signature/issues) 登记企业名称，加入上方名录，帮助更多同行建立信心
+- 贡献代码、文档、各地口岸适配案例，或反馈使用中遇到的问题
+- 企业如需地方口岸定制适配、私有化部署、运维保障等技术服务，欢迎邮件联系
 
 ---
-**任何问题欢迎提 issue 或发邮件至 julxxy@outlook.com 交流！**
+
+## License
+
+[GPL-3.0](LICENSE)
+
+---
+**任何问题欢迎提 [issue](https://github.com/julxxy/chinaport-data-signature/issues) 或发邮件至 [julxxy@outlook.com](mailto:julxxy@outlook.com) 交流！**

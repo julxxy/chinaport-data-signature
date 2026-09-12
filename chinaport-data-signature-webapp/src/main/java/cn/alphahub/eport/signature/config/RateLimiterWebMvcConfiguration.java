@@ -5,14 +5,18 @@ import cn.alphahub.eport.signature.base.utils.TraceHelper;
 import cn.alphahub.eport.signature.util.ClientIPUtils;
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
-import com.google.common.util.concurrent.RateLimiter;
+import io.github.bucket4j.Bandwidth;
+import io.github.bucket4j.Bucket;
+import io.github.bucket4j.ConsumptionProbe;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -51,75 +55,71 @@ public class RateLimiterWebMvcConfiguration implements WebMvcConfigurer {
         }
 
         @Override
-        @SuppressWarnings("all")
         public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-            RateLimiter limiter = ipRateLimiterManager.getRateLimiterForIp(request);
-            // 首次访问，limiter 可能为 null，直接放行
-            if (limiter == null || limiter.tryAcquire()) {
+            ConsumptionProbe probe = ipRateLimiterManager.tryConsume(request);
+            if (probe.isConsumed()) {
                 return true;
-            } else {
-                log.warn("触发限流，客户端IP: {}", ClientIPUtils.getClientIP(request));
-                response.setContentType("application/json;charset=utf-8");
-                PrintWriter writer = response.getWriter();
-                Result<Object> result = Result.error(TOO_MANY_REQUESTS.value(), TOO_MANY_REQUESTS.getReasonPhrase());
-                result.setTraceId(TraceHelper.getTraceId(request));
-                writer.println(toJson(result));
-                writer.flush();
-                writer.close();
-                return false;
             }
+            log.warn("触发限流，客户端IP: {}", ClientIPUtils.getClientIP(request));
+            long retryAfterSeconds = Math.max(1, TimeUnit.NANOSECONDS.toSeconds(probe.getNanosToWaitForRefill()));
+            response.setStatus(TOO_MANY_REQUESTS.value());
+            response.setHeader(HttpHeaders.RETRY_AFTER, String.valueOf(retryAfterSeconds));
+            response.setContentType("application/json;charset=utf-8");
+            Result<Object> result = Result.error(TOO_MANY_REQUESTS.value(), TOO_MANY_REQUESTS.getReasonPhrase());
+            result.setTraceId(TraceHelper.getTraceId(request));
+            PrintWriter writer = response.getWriter();
+            writer.println(toJson(result));
+            writer.flush();
+            return false;
         }
     }
 
     /**
      * IP限流管理器
+     * <p>
+     * 每个 IP 一个令牌桶: 容量 {@link #PERMITS_PER_SECOND}, 每秒补满; 新桶初始即为满桶, 允许新客户端第一秒内的突发请求.
      */
     @Component
     public static class IpRateLimiterManager {
         /**
-         * 每个IP地址限流: permitsPerSecond 个请求/秒
+         * 每个IP地址限流: PERMITS_PER_SECOND 个请求/秒
          */
-        private static final double permitsPerSecond = 10.0;
+        private static final long PERMITS_PER_SECOND = 10L;
 
         /**
-         * 存储每个 IP 的 RateLimiter
+         * 最多同时跟踪的 IP 数, 防止海量 IP 撑爆内存
          */
-        @SuppressWarnings("all")
-        private final Cache<String, RateLimiter> ipRateLimiters;
+        private static final long MAX_TRACKED_IPS = 10_000L;
 
         /**
-         * 标记 IP 是否首次访问
+         * 存储每个 IP 的令牌桶, 一段时间不再访问后自动淘汰
          */
-        private final Cache<String, Boolean> ipFirstVisitFlags;
+        private final Cache<String, Bucket> ipBuckets;
 
         public IpRateLimiterManager() {
-            ipRateLimiters = Caffeine.newBuilder()
-                    .expireAfterWrite(1, TimeUnit.MINUTES)
-                    .build();
-
-            ipFirstVisitFlags = Caffeine.newBuilder()
-                    .expireAfterWrite(2, TimeUnit.MINUTES)
+            ipBuckets = Caffeine.newBuilder()
+                    .maximumSize(MAX_TRACKED_IPS)
+                    .expireAfterAccess(1, TimeUnit.MINUTES)
                     .build();
         }
 
-        @SuppressWarnings("all")
-        public RateLimiter getRateLimiterForIp(HttpServletRequest request) {
+        /**
+         * 尝试为当前请求消耗一个令牌
+         *
+         * @return 消耗结果, {@link ConsumptionProbe#isConsumed()} 为 true 表示放行
+         */
+        public ConsumptionProbe tryConsume(HttpServletRequest request) {
             String clientIP = ClientIPUtils.getClientIP(request);
-
-            // 如果是首次访问，记录并放行（返回 null）
-            Boolean firstVisit = ipFirstVisitFlags.getIfPresent(clientIP);
-            if (firstVisit == null) {
-                ipFirstVisitFlags.put(clientIP, true);
-                return null;
-            }
-
-            // 非首次访问，正常限流
-            return ipRateLimiters.get(clientIP, this::createRateLimiter);
+            Bucket bucket = ipBuckets.get(clientIP, this::createBucket);
+            return bucket.tryConsumeAndReturnRemaining(1);
         }
 
-        @SuppressWarnings("all")
-        private RateLimiter createRateLimiter(String ip) {
-            return RateLimiter.create(permitsPerSecond);
+        private Bucket createBucket(String ip) {
+            Bandwidth limit = Bandwidth.builder()
+                    .capacity(PERMITS_PER_SECOND)
+                    .refillGreedy(PERMITS_PER_SECOND, Duration.ofSeconds(1))
+                    .build();
+            return Bucket.builder().addLimit(limit).build();
         }
     }
 }
