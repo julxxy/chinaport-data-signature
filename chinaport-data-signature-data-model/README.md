@@ -1,8 +1,21 @@
 # 中国电子口岸加签服务的数据模型
 
-[![Maven Central](https://img.shields.io/maven-central/v/io.github.weasley-j/chinaport-data-signature-data-model)](https://search.maven.org/artifact/io.github.weasley-j/chinaport-data-signature-data-model)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.julxxy/chinaport-data-signature-data-model)](https://central.sonatype.com/artifact/io.github.julxxy/chinaport-data-signature-data-model)
 
 > 海关报文加签的数据模型，方便各方引入依赖。
+
+## 0 引入依赖
+
+```xml
+<dependency>
+    <groupId>io.github.julxxy</groupId>
+    <artifactId>chinaport-data-signature-data-model</artifactId>
+    <version>1.0.9</version>
+</dependency>
+```
+
+> 自 `1.0.9` 起 `groupId` 由 `io.github.weasley-j` 迁移为 `io.github.julxxy`，`artifactId` 与 Java 包名不变。
+> 历史版本（`<= 1.0.8`）仍可通过 [io.github.weasley-j](https://central.sonatype.com/artifact/io.github.weasley-j/chinaport-data-signature-data-model) 获取，但不再更新。
 
 ## 1 目前已实现的数据模型
 

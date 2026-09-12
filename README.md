@@ -12,7 +12,7 @@ _A free, open-source end-to-end signature solution for Chinese E-Port CEBXxxMess
 [![Docker Pulls](https://img.shields.io/docker/pulls/weasleyj/chinaport-data-signature?style=flat-square&logo=docker&label=Docker%20Pulls&color=2496ED)](https://hub.docker.com/r/weasleyj/chinaport-data-signature)
 [![Docker Image Size](https://img.shields.io/docker/image-size/weasleyj/chinaport-data-signature/latest?style=flat-square&logo=docker&label=Image%20Size&color=2496ED)](https://hub.docker.com/r/weasleyj/chinaport-data-signature)
 [![Docker Image Version](https://img.shields.io/docker/v/weasleyj/chinaport-data-signature?style=flat-square&logo=docker&label=Docker%20Version&color=2496ED&sort=semver)](https://hub.docker.com/r/weasleyj/chinaport-data-signature/tags)
-[![Maven Central](https://img.shields.io/maven-central/v/io.github.weasley-j/chinaport-data-signature-data-model?style=flat-square&logo=apache-maven&label=Maven%20Central&color=C71A36)](https://search.maven.org/artifact/io.github.weasley-j/chinaport-data-signature-data-model)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.julxxy/chinaport-data-signature-data-model?style=flat-square&logo=apache-maven&label=Maven%20Central&color=C71A36)](https://central.sonatype.com/artifact/io.github.julxxy/chinaport-data-signature-data-model)
 
 [![Java](https://img.shields.io/badge/Java-17+-ED8B00?style=flat-square&logo=openjdk&logoColor=white)](https://openjdk.org/)
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-6DB33F?style=flat-square&logo=spring-boot&logoColor=white)](https://spring.io/projects/spring-boot)
@@ -60,14 +60,15 @@ _A free, open-source end-to-end signature solution for Chinese E-Port CEBXxxMess
 - 单体应用：直接下载 [Releases](https://github.com/julxxy/chinaport-data-signature/releases)
 - 微服务：切换 [feature_microservice](https://github.com/julxxy/chinaport-data-signature/tree/feature_microservice) 分支
 - Docker 镜像：[Docker Hub](https://hub.docker.com/repository/docker/weasleyj/chinaport-data-signature)
-- Java项目集成：使用 [Maven 数据模型](https://central.sonatype.com/artifact/io.github.weasley-j/chinaport-data-signature-data-model), Maven Integration
+- Java项目集成：使用 [Maven 数据模型](https://central.sonatype.com/artifact/io.github.julxxy/chinaport-data-signature-data-model), Maven Integration
 ```xml
 <dependency>
-    <groupId>io.github.weasley-j</groupId>
+    <groupId>io.github.julxxy</groupId>
     <artifactId>chinaport-data-signature-data-model</artifactId>
     <version>Latest Version</version>
 </dependency>
 ```
+  > `1.0.9` 起 `groupId` 由 `io.github.weasley-j` 迁移为 `io.github.julxxy`，旧坐标不再更新
 
 > 建议 Windows 平台用 [Git Bash](https://gitforwindows.org/) 启动（终端日志不乱码）
 

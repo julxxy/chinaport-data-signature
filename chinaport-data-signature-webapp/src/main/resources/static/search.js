@@ -49,6 +49,12 @@ api[0].list[1].list.push({
     url: 'http://localhost:8080/rpc/eport/result/ceb622msg',
     desc: '查询621进口单申报结果',
 });
+api[0].list[1].list.push({
+    order: '3',
+    deprecated: 'false',
+    url: 'http://localhost:8080/rpc/eport/result/ceb900msg',
+    desc: '查询报错信息',
+});
 api[0].list.push({
     alias: 'UkeyHealthController',
     order: '3',

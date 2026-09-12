@@ -4,9 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>io.github.weasley-j</groupId>
+    <groupId>io.github.julxxy</groupId>
     <artifactId>chinaport-data-signature-data-model</artifactId>
-    <version>1.0.8</version>
+    <version>1.0.9</version>
     <packaging>jar</packaging>
     <name>chinaport-data-signature-data-model</name>
     <description>中国电子口岸加签服务数据模型: 1. 海关 179 数据抓取; 2. 海关总署xml报文</description>

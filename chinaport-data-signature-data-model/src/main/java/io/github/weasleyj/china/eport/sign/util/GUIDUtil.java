@@ -17,6 +17,10 @@ public final class GUIDUtil {
             "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V",
             "W", "X", "Y", "Z"
     };
+    /**
+     * 报文 GUID 中间的固定标识段（7 位），用于标识报文由本项目生成
+     */
+    private static final String TAG = "CEBSIGN";
 
     private static String shortUUID(int length) {
         if (length <= 0) {
@@ -34,12 +38,14 @@ public final class GUIDUtil {
 
     /**
      * 获取GUID
+     * <p>
+     * 格式: {@code XXXXXX-CEBSIGN-yyyyMMddHHmmss-XXXXXX}，总长 36 位，与标准 UUID 等长
      *
      * @return GUID
      */
     public static String getGuid() {
         String first = shortUUID(6).toUpperCase();
-        String second = "WEASLEY";
+        String second = TAG;
         String third = LocalDateTime.now().format(FORMATTER);
         String forth = shortUUID(6).toUpperCase();
 

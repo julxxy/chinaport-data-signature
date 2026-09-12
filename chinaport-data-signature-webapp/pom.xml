@@ -21,7 +21,7 @@
         <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <signature-data-model.version>1.0.8</signature-data-model.version>
+        <signature-data-model.version>1.0.9</signature-data-model.version>
         <spring-cloud.version>2025.0.0</spring-cloud.version>
         <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
         <maven-source-plugin.version>3.3.1</maven-source-plugin.version>
@@ -55,7 +55,7 @@
     <dependencies>
         <!-- 数据模型 -->
         <dependency>
-            <groupId>io.github.weasley-j</groupId>
+            <groupId>io.github.julxxy</groupId>
             <artifactId>chinaport-data-signature-data-model</artifactId>
             <version>${signature-data-model.version}</version>
         </dependency>
@@ -354,7 +354,7 @@
                         <exclude>com.alibaba:fastjson</exclude>
                     </excludes>
                     <includes>
-                        <include>io.github.weasley-j:chinaport-data-signature-data-model</include>
+                        <include>io.github.julxxy:chinaport-data-signature-data-model</include>
                     </includes>
                 </configuration>
                 <executions>
